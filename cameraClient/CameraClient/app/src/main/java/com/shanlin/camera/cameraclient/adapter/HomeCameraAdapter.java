@@ -1,6 +1,7 @@
 package com.shanlin.camera.cameraclient.adapter;
 
 import android.content.Context;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,30 +48,43 @@ public class HomeCameraAdapter extends RecyclerView.Adapter<HomeCameraAdapter.VH
 //                }
 //            }
 //        });
-        View view;
+        final View view;
+        final VH viewHolder;
         switch (viewType){
             case type_person_device:
-                view = mInflater.inflate(R.layout.item_zhihu_home_first,parent,false);
-                return new VHPersonal(view);
+                view = mInflater.inflate(R.layout.item_camera_person,parent,false);
+                viewHolder =  new VHPersonal(view);
+                break;
             case type_share_device:
-                 view = mInflater.inflate(R.layout.item_zhihu_home_first,parent,false);
-                return new VHShare(view);
+                 view = mInflater.inflate(R.layout.item_camera_share,parent,false);
+                viewHolder =  new VHShare(view);
+                break;
             default:
-                view = mInflater.inflate(R.layout.item_zhihu_home_first,parent,false);
-                return new VHPersonal(view);
+                view = mInflater.inflate(R.layout.item_camera_person,parent,false);
+                viewHolder =  new VHPersonal(view);
+                break;
         }
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if( mClickListener != null){
+                    mClickListener.onItemClick(viewHolder.getAdapterPosition(),v,viewHolder);
+                }
+            }
+        });
+        return viewHolder;
 
     }
 
     @Override
     public void onBindViewHolder(VH holder, int position) {
-        holder.inflateFromModel(cameraDevices.get(position));
+        holder.inflateFromModel(cameraDevices.get(position),mClickListener);
 
 //        Article item = mItems.get(position);
 //
 //        // 把每个图片视图设置不同的Transition名称, 防止在一个视图内有多个相同的名称, 在变换的时候造成混乱
 //        // Fragment支持多个View进行变换, 使用适配器时, 需要加以区分
-//        ViewCompat.setTransitionName(holder.img, String.valueOf(position) + "_image");
+        ViewCompat.setTransitionName(holder.imgCamera, String.valueOf(position) + "_image");
 //
 //        holder.img.setImageResource(item.getImgRes());
 //        holder.tvTitle.setText(item.getTitle());
@@ -83,7 +97,7 @@ public class HomeCameraAdapter extends RecyclerView.Adapter<HomeCameraAdapter.VH
 
     @Override
     public int getItemViewType(int position) {
-        return cameraDevices.get(0).getDeviceType();
+        return cameraDevices.get(position).getDeviceType();
     }
 
 
@@ -107,16 +121,21 @@ public class HomeCameraAdapter extends RecyclerView.Adapter<HomeCameraAdapter.VH
 
     //通用设备
     public abstract class VH extends RecyclerView.ViewHolder {
-        public TextView tvTitle;
-        public ImageView img;
+        public ImageView imgCamera;
+        public TextView tvGid;
+        public TextView tvDeviceName;
+        public TextView tvDeviceDesc;
 
         public VH(View itemView) {
             super(itemView);
-            tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
-            img = (ImageView) itemView.findViewById(R.id.img);
+
+            tvDeviceName = (TextView) itemView.findViewById(R.id.tv_camera_name);
+            imgCamera = (ImageView) itemView.findViewById(R.id.img_camera);
+            tvGid = (TextView) itemView.findViewById(R.id.tv_camera_gid);
+            tvDeviceDesc = (TextView) itemView.findViewById(R.id.tv_camera_desc);
         }
 
-        public abstract  void inflateFromModel(CameraDevice device);
+        public abstract  void inflateFromModel(CameraDevice device,OnItemClickListener listener);
     }
 
     //共享设备
@@ -126,7 +145,11 @@ public class HomeCameraAdapter extends RecyclerView.Adapter<HomeCameraAdapter.VH
         }
 
         @Override
-        public void inflateFromModel(CameraDevice device) {
+        public void inflateFromModel(CameraDevice device, final OnItemClickListener listener) {
+            imgCamera.setImageResource(device.getImg());
+            tvDeviceName.setText(device.getNickName());
+            tvGid.setText(device.getGid());
+            tvDeviceDesc.setText(device.getDesc());
 
         }
     }
@@ -138,8 +161,11 @@ public class HomeCameraAdapter extends RecyclerView.Adapter<HomeCameraAdapter.VH
         }
 
         @Override
-        public void inflateFromModel(CameraDevice device) {
-
+        public void inflateFromModel(CameraDevice device,OnItemClickListener listener) {
+            imgCamera.setImageResource(device.getImg());
+            tvDeviceName.setText(device.getNickName());
+            tvGid.setText("personal "+device.getGid());
+            tvDeviceDesc.setText(device.getDesc());
         }
     }
 

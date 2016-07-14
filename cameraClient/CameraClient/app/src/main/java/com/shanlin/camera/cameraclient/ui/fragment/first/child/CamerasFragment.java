@@ -16,9 +16,9 @@ import android.widget.Toast;
 
 import com.shanlin.camera.cameraclient.MainActivity;
 import com.shanlin.camera.cameraclient.R;
-import com.shanlin.camera.cameraclient.adapter.FirstHomeAdapter;
+import com.shanlin.camera.cameraclient.adapter.HomeCameraAdapter;
 import com.shanlin.camera.cameraclient.base.BaseFragment;
-import com.shanlin.camera.cameraclient.entity.Article;
+import com.shanlin.camera.cameraclient.entity.CameraDevice;
 import com.shanlin.camera.cameraclient.event.TabSelectedEvent;
 import com.shanlin.camera.cameraclient.helper.DetailTransition;
 import com.shanlin.camera.cameraclient.listener.OnItemClickListener;
@@ -40,7 +40,7 @@ public class CamerasFragment extends BaseFragment implements SwipeRefreshLayout.
     private SwipeRefreshLayout mRefreshLayout;
     private FloatingActionButton mFab;
 
-    private FirstHomeAdapter mAdapter;
+    private HomeCameraAdapter mAdapter;
 
     private boolean mInAtTop = true;
     private int mScrollTotal;
@@ -89,39 +89,64 @@ public class CamerasFragment extends BaseFragment implements SwipeRefreshLayout.
         mRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         mRefreshLayout.setOnRefreshListener(this);
 
-        mAdapter = new FirstHomeAdapter(_mActivity);
+        mAdapter = new HomeCameraAdapter(_mActivity);
         LinearLayoutManager manager = new LinearLayoutManager(_mActivity);
         mRecy.setLayoutManager(manager);
         mRecy.setAdapter(mAdapter);
 
+//        mAdapter.setOnItemClickListener(new OnItemClickListener() {
+//            @Override
+//            public void onItemClick(int position, View view, RecyclerView.ViewHolder vh) {
+//                CameraDetailFragment fragment = CameraDetailFragment.newInstance(mAdapter.getItem(position));
+//
+//                // 这里是使用SharedElement的用例
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                    setExitTransition(new Fade());
+//                    setSharedElementReturnTransition(new DetailTransition());
+////                    fragment.setEnterTransition(new Fade());
+//                    fragment.setSharedElementEnterTransition(new DetailTransition());
+//
+//                    // 因为使用add的原因,Material过渡动画只有在进栈时有,返回时没有;
+//                    // 如果想进栈和出栈都有过渡动画,需要replace,目前库暂不支持,后续会调研看是否可以支持
+//                    startWithSharedElement(fragment, ((FirstHomeAdapter.VH) vh).img, getResources().getString(R.string.image_transition));
+//                } else {
+//                    // 这里如果5.0以下系统调用startWithSharedElement(),会无动画,所以低于5.0,start(fragment)
+//                    start(fragment);
+//                }
+//            }
+//        });
+
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int position, View view, RecyclerView.ViewHolder vh) {
-                FirstDetailFragment fragment = FirstDetailFragment.newInstance(mAdapter.getItem(position));
-
-                // 这里是使用SharedElement的用例
+                CameraDetailFragment detailFragment = CameraDetailFragment.newInstance(mAdapter.getItem(position));
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     setExitTransition(new Fade());
                     setSharedElementReturnTransition(new DetailTransition());
 //                    fragment.setEnterTransition(new Fade());
-                    fragment.setSharedElementEnterTransition(new DetailTransition());
+                    detailFragment.setSharedElementEnterTransition(new DetailTransition());
 
                     // 因为使用add的原因,Material过渡动画只有在进栈时有,返回时没有;
                     // 如果想进栈和出栈都有过渡动画,需要replace,目前库暂不支持,后续会调研看是否可以支持
-                    startWithSharedElement(fragment, ((FirstHomeAdapter.VH) vh).img, getResources().getString(R.string.image_transition));
+                    startWithSharedElement(detailFragment, ((HomeCameraAdapter.VH) vh).imgCamera, getResources().getString(R.string.image_transition));
                 } else {
                     // 这里如果5.0以下系统调用startWithSharedElement(),会无动画,所以低于5.0,start(fragment)
-                    start(fragment);
+                    start(detailFragment);
                 }
             }
         });
 
         // Init Datas
-        List<Article> articleList = new ArrayList<>();
+        List<CameraDevice> articleList = new ArrayList<>();
         for (int i = 0; i < 15; i++) {
             int index = i % 5;
-            Article article = new Article(mTitles[index], mImgRes[index]);
-            articleList.add(article);
+            CameraDevice cameraDevice = new CameraDevice();
+            cameraDevice.setNickName(mTitles[index].substring(0,5));
+            cameraDevice.setImg(mImgRes[index]);
+            cameraDevice.setDesc(mTitles[index]);
+            cameraDevice.setGid(mTitles[index].substring(0,2) + index);
+            cameraDevice.setDeviceType(index % 2);
+            articleList.add(cameraDevice);
         }
         mAdapter.setDatas(articleList);
 

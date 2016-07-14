@@ -18,7 +18,7 @@ public class CameraDevice implements Parcelable{
 
     private String accessPwd;
 
-    private String img;
+    private int img;
 
     private String desc;
 
@@ -56,21 +56,24 @@ public class CameraDevice implements Parcelable{
         this.accessPwd = accessPwd;
     }
 
-    public String getImg() {
+    public int getImg() {
         return img;
     }
 
-    public void setImg(String img) {
+    public void setImg(int img) {
         this.img = img;
     }
 
+    public CameraDevice(){
+
+    }
 
     protected CameraDevice(Parcel in) {
         nickName = in.readString();
         gid = in.readString();
         accessName = in.readString();
         accessPwd = in.readString();
-        img = in.readString();
+        img = in.readInt();
         desc = in.readString();
         deviceType = in.readInt();
     }
@@ -81,7 +84,7 @@ public class CameraDevice implements Parcelable{
         dest.writeString(gid);
         dest.writeString(accessName);
         dest.writeString(accessPwd);
-        dest.writeString(img);
+        dest.writeInt(img);
         dest.writeString(desc);
         dest.writeInt(deviceType);
     }

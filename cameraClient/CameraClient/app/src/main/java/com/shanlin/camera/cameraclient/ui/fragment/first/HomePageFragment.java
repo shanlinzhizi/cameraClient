@@ -8,8 +8,7 @@ import android.view.ViewGroup;
 
 import com.shanlin.camera.cameraclient.R;
 import com.shanlin.camera.cameraclient.base.BaseLazyMainFragment;
-import com.shanlin.camera.cameraclient.ui.fragment.first.child.FirstHomeFragment;
-
+import com.shanlin.camera.cameraclient.ui.fragment.first.child.CamerasFragment;
 
 
 /**
@@ -36,7 +35,8 @@ public class HomePageFragment extends BaseLazyMainFragment {
     @Override
     protected void initLazyView(@Nullable Bundle savedInstanceState) {
         if (savedInstanceState == null) {
-            loadRootFragment(R.id.fl_first_container, FirstHomeFragment.newInstance());
+//            loadRootFragment(R.id.fl_first_container, FirstHomeFragment.newInstance());
+            loadRootFragment(R.id.fl_first_container, CamerasFragment.newInstance());
         }
     }
 }
