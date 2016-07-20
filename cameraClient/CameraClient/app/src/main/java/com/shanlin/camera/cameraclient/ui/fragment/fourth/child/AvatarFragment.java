@@ -27,7 +27,7 @@ public class AvatarFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.zhihu_fragment_fourth_avatar, container, false);
+        View view = inflater.inflate(R.layout.fragment_avatar_top, container, false);
         return view;
     }
 }

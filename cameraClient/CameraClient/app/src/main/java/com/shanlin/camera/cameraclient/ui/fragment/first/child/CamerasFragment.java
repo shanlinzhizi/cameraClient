@@ -22,6 +22,10 @@ import com.shanlin.camera.cameraclient.entity.CameraDevice;
 import com.shanlin.camera.cameraclient.event.TabSelectedEvent;
 import com.shanlin.camera.cameraclient.helper.DetailTransition;
 import com.shanlin.camera.cameraclient.listener.OnItemClickListener;
+import com.shanlin.camera.cameraclient.net.CamerasProxy;
+import com.shanlin.camera.cameraclient.net.TestGetCameraProxy;
+
+import junit.framework.Test;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -94,28 +98,6 @@ public class CamerasFragment extends BaseFragment implements SwipeRefreshLayout.
         mRecy.setLayoutManager(manager);
         mRecy.setAdapter(mAdapter);
 
-//        mAdapter.setOnItemClickListener(new OnItemClickListener() {
-//            @Override
-//            public void onItemClick(int position, View view, RecyclerView.ViewHolder vh) {
-//                CameraDetailFragment fragment = CameraDetailFragment.newInstance(mAdapter.getItem(position));
-//
-//                // 这里是使用SharedElement的用例
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                    setExitTransition(new Fade());
-//                    setSharedElementReturnTransition(new DetailTransition());
-////                    fragment.setEnterTransition(new Fade());
-//                    fragment.setSharedElementEnterTransition(new DetailTransition());
-//
-//                    // 因为使用add的原因,Material过渡动画只有在进栈时有,返回时没有;
-//                    // 如果想进栈和出栈都有过渡动画,需要replace,目前库暂不支持,后续会调研看是否可以支持
-//                    startWithSharedElement(fragment, ((FirstHomeAdapter.VH) vh).img, getResources().getString(R.string.image_transition));
-//                } else {
-//                    // 这里如果5.0以下系统调用startWithSharedElement(),会无动画,所以低于5.0,start(fragment)
-//                    start(fragment);
-//                }
-//            }
-//        });
-
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int position, View view, RecyclerView.ViewHolder vh) {
@@ -125,30 +107,25 @@ public class CamerasFragment extends BaseFragment implements SwipeRefreshLayout.
                     setSharedElementReturnTransition(new DetailTransition());
 //                    fragment.setEnterTransition(new Fade());
                     detailFragment.setSharedElementEnterTransition(new DetailTransition());
-
                     // 因为使用add的原因,Material过渡动画只有在进栈时有,返回时没有;
                     // 如果想进栈和出栈都有过渡动画,需要replace,目前库暂不支持,后续会调研看是否可以支持
                     startWithSharedElement(detailFragment, ((HomeCameraAdapter.VH) vh).imgCamera, getResources().getString(R.string.image_transition));
                 } else {
                     // 这里如果5.0以下系统调用startWithSharedElement(),会无动画,所以低于5.0,start(fragment)
                     start(detailFragment);
+
                 }
             }
         });
 
-        // Init Datas
-        List<CameraDevice> articleList = new ArrayList<>();
-        for (int i = 0; i < 15; i++) {
-            int index = i % 5;
-            CameraDevice cameraDevice = new CameraDevice();
-            cameraDevice.setNickName(mTitles[index].substring(0,5));
-            cameraDevice.setImg(mImgRes[index]);
-            cameraDevice.setDesc(mTitles[index]);
-            cameraDevice.setGid(mTitles[index].substring(0,2) + index);
-            cameraDevice.setDeviceType(index % 2);
-            articleList.add(cameraDevice);
+        CamerasProxy proxy = new CamerasProxy();
+        proxy.setProxy(new TestGetCameraProxy());
+        List<CameraDevice> cameraDevices = proxy.getCameras();
+        if( cameraDevices.isEmpty()){
+            replaceFragment(new EmptyDeviceFragment(),true);
         }
-        mAdapter.setDatas(articleList);
+
+        mAdapter.setDatas(cameraDevices);
 
         mRecy.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

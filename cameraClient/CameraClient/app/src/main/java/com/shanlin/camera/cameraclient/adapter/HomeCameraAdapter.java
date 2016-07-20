@@ -1,17 +1,21 @@
 package com.shanlin.camera.cameraclient.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.shanlin.camera.cameraclient.R;
 import com.shanlin.camera.cameraclient.entity.CameraDevice;
 import com.shanlin.camera.cameraclient.listener.OnItemClickListener;
+import com.shanlin.camera.cameraclient.listener.OnItemPlayClickListener;
+import com.shanlin.camera.cameraclient.ui.PlayActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +33,7 @@ public class HomeCameraAdapter extends RecyclerView.Adapter<HomeCameraAdapter.VH
     private LayoutInflater mInflater;
 
     private OnItemClickListener mClickListener;
+    private OnItemPlayClickListener itemPlayClickListener;
 
 
     public HomeCameraAdapter(Context context) {
@@ -72,6 +77,16 @@ public class HomeCameraAdapter extends RecyclerView.Adapter<HomeCameraAdapter.VH
                 }
             }
         });
+        if( viewHolder.imgPlay != null) {
+            viewHolder.imgPlay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (itemPlayClickListener != null) {
+                        itemPlayClickListener.onItemPlayClick(viewHolder.getAdapterPosition(), view, viewHolder);
+                    }
+                }
+            });
+        }
         return viewHolder;
 
     }
@@ -119,12 +134,23 @@ public class HomeCameraAdapter extends RecyclerView.Adapter<HomeCameraAdapter.VH
         this.mClickListener = itemClickListener;
     }
 
+    public void setOnItemPlayClickListener(OnItemPlayClickListener itemPlayClickListener){
+        this.itemPlayClickListener = itemPlayClickListener;
+    }
+
+    private void goToPlayPage(Context context, CameraDevice device){
+        Intent intent = new Intent(context, PlayActivity.class);
+        intent.putExtra(PlayActivity.CODE_PRAC_DEVICE,device);
+        context.startActivity(intent);
+    }
+
     //通用设备
     public abstract class VH extends RecyclerView.ViewHolder {
         public ImageView imgCamera;
         public TextView tvGid;
         public TextView tvDeviceName;
         public TextView tvDeviceDesc;
+        public ImageButton imgPlay;
 
         public VH(View itemView) {
             super(itemView);
@@ -133,6 +159,7 @@ public class HomeCameraAdapter extends RecyclerView.Adapter<HomeCameraAdapter.VH
             imgCamera = (ImageView) itemView.findViewById(R.id.img_camera);
             tvGid = (TextView) itemView.findViewById(R.id.tv_camera_gid);
             tvDeviceDesc = (TextView) itemView.findViewById(R.id.tv_camera_desc);
+            imgPlay = (ImageButton) itemView.findViewById(R.id.btn_play);
         }
 
         public abstract  void inflateFromModel(CameraDevice device,OnItemClickListener listener);
@@ -168,5 +195,7 @@ public class HomeCameraAdapter extends RecyclerView.Adapter<HomeCameraAdapter.VH
             tvDeviceDesc.setText(device.getDesc());
         }
     }
+
+
 
 }

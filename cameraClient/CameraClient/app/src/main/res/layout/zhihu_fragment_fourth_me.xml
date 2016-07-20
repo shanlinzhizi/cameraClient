@@ -25,5 +25,13 @@
             android:paddingLeft="16dp"
             android:drawableRight="@drawable/ic_right"
             android:paddingRight="16dp"/>
+
+        <GridView
+            android:id="@+id/grd_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="3"
+            />
+
     </LinearLayout>
 </FrameLayout>

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.shanlin.camera.cameraclient.R;
 import com.shanlin.camera.cameraclient.base.BaseLazyMainFragment;
 import com.shanlin.camera.cameraclient.ui.fragment.fourth.child.AvatarFragment;
+import com.shanlin.camera.cameraclient.ui.fragment.fourth.child.MeComponetFragment;
 
 /**
  * Created by YoKeyword on 16/6/3.
@@ -50,8 +51,9 @@ public class MeFragment extends BaseLazyMainFragment {
     }
 
     private void loadFragment() {
-        loadRootFragment(R.id.fl_fourth_container_upper, AvatarFragment.newInstance());
-        loadRootFragment(R.id.fl_fourth_container_lower, com.shanlin.camera.cameraclient.ui.fragment.fourth.child.MeFragment.newInstance());
+            loadRootFragment(R.id.fl_fourth_container_upper, AvatarFragment.newInstance());
+            loadRootFragment(R.id.fl_fourth_container_lower, MeComponetFragment.newInstance());
+
     }
 
     public void onBackToFirstFragment() {

@@ -8,12 +8,12 @@
     <FrameLayout
         android:id="@+id/fl_fourth_container_upper"
         android:layout_width="match_parent"
-        android:layout_height="210dp"/>
+        android:layout_height="230dp"/>
 
     <FrameLayout
         android:id="@+id/fl_fourth_container_lower"
         android:layout_width="match_parent"
-        android:layout_marginTop="210dp"
+        android:layout_marginTop="230dp"
         android:layout_height="match_parent"/>
 
     <android.support.v7.widget.Toolbar

@@ -6,8 +6,8 @@ import android.support.annotation.Nullable;
 import com.shanlin.camera.cameraclient.base.BaseLazyMainFragment;
 import com.shanlin.camera.cameraclient.event.TabSelectedEvent;
 import com.shanlin.camera.cameraclient.ui.fragment.first.HomePageFragment;
-import com.shanlin.camera.cameraclient.ui.fragment.first.child.FirstHomeFragment;
 import com.shanlin.camera.cameraclient.ui.fragment.fourth.MeFragment;
+import com.shanlin.camera.cameraclient.ui.fragment.fourth.child.MeComponetFragment;
 import com.shanlin.camera.cameraclient.ui.fragment.second.PlayFragment;
 import com.shanlin.camera.cameraclient.ui.fragment.second.child.ViewPagerFragment;
 import com.shanlin.camera.cameraclient.ui.fragment.third.CameraInfoFragment;
@@ -98,13 +98,13 @@ public class MainActivity extends SupportActivity implements BaseLazyMainFragmen
                 // 如果不在该类别Fragment的主页,则回到主页;
                 if (count > 1) {
                     if (currentFragment instanceof HomePageFragment) {
-                        currentFragment.popToChild(FirstHomeFragment.class, false);
+                        currentFragment.popToChild(HomePageFragment.class, false);
                     } else if (currentFragment instanceof PlayFragment) {
                         currentFragment.popToChild(ViewPagerFragment.class, false);
                     } else if (currentFragment instanceof CameraInfoFragment) {
                         currentFragment.popToChild(ShopFragment.class, false);
                     } else if (currentFragment instanceof MeFragment) {
-                        currentFragment.popToChild(com.shanlin.camera.cameraclient.ui.fragment.fourth.child.MeFragment.class, false);
+                        currentFragment.popToChild(MeComponetFragment.class, false);
                     }
                     return;
                 }
