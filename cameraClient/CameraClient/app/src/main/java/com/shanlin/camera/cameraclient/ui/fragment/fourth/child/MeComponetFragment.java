@@ -1,7 +1,6 @@
 package com.shanlin.camera.cameraclient.ui.fragment.fourth.child;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -40,7 +39,7 @@ public class MeComponetFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.zhihu_fragment_fourth_me, container, false);
+        View view = inflater.inflate(R.layout.fragment_me_component, container, false);
         initView(view);
         return view;
     }

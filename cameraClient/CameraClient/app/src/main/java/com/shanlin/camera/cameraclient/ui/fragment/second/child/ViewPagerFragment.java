@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.shanlin.camera.cameraclient.R;
-import com.shanlin.camera.cameraclient.adapter.ZhihuPagerFragmentAdapter;
+import com.shanlin.camera.cameraclient.adapter.PlayPagerFragmentAdapter;
 import com.shanlin.camera.cameraclient.base.BaseFragment;
 
 
@@ -19,11 +19,11 @@ import com.shanlin.camera.cameraclient.base.BaseFragment;
 public class ViewPagerFragment extends BaseFragment {
     private TabLayout mTab;
     private ViewPager mViewPager;
+    public static final String PRC_DEV = "device";
 
     public static ViewPagerFragment newInstance() {
 
         Bundle args = new Bundle();
-
         ViewPagerFragment fragment = new ViewPagerFragment();
         fragment.setArguments(args);
         return fragment;
@@ -32,7 +32,7 @@ public class ViewPagerFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.zhihu_fragment_second_pager, container, false);
+        View view = inflater.inflate(R.layout.fragment_second_live_pager, container, false);
         initView(view);
         return view;
     }
@@ -45,7 +45,7 @@ public class ViewPagerFragment extends BaseFragment {
         mTab.addTab(mTab.newTab());
         mTab.addTab(mTab.newTab());
 
-        mViewPager.setAdapter(new ZhihuPagerFragmentAdapter(getChildFragmentManager()));
+        mViewPager.setAdapter(new PlayPagerFragmentAdapter(getChildFragmentManager()));
         mTab.setupWithViewPager(mViewPager);
     }
 }

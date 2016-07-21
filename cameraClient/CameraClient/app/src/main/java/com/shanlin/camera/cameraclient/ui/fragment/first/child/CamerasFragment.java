@@ -22,15 +22,14 @@ import com.shanlin.camera.cameraclient.entity.CameraDevice;
 import com.shanlin.camera.cameraclient.event.TabSelectedEvent;
 import com.shanlin.camera.cameraclient.helper.DetailTransition;
 import com.shanlin.camera.cameraclient.listener.OnItemClickListener;
-import com.shanlin.camera.cameraclient.net.CamerasProxy;
-import com.shanlin.camera.cameraclient.net.TestGetCameraProxy;
-
-import junit.framework.Test;
+import com.shanlin.camera.cameraclient.listener.OnItemPlayClickListener;
+import com.shanlin.camera.cameraclient.net.DeviceManagerProxy;
+import com.shanlin.camera.cameraclient.net.IResponse;
+import com.shanlin.camera.cameraclient.ui.fragment.second.PlayFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -75,7 +74,7 @@ public class CamerasFragment extends BaseFragment implements SwipeRefreshLayout.
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.zhihu_fragment_first_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_homepage_cameras, container, false);
         EventBus.getDefault().register(this);
         initView(view);
         return view;
@@ -118,14 +117,47 @@ public class CamerasFragment extends BaseFragment implements SwipeRefreshLayout.
             }
         });
 
-        CamerasProxy proxy = new CamerasProxy();
-        proxy.setProxy(new TestGetCameraProxy());
-        List<CameraDevice> cameraDevices = proxy.getCameras();
-        if( cameraDevices.isEmpty()){
-            replaceFragment(new EmptyDeviceFragment(),true);
-        }
+        mAdapter.setOnItemPlayClickListener(new OnItemPlayClickListener() {
+            @Override
+            public void onItemPlayClick(int position, View view, RecyclerView.ViewHolder vh) {
+                PlayFragment  playFragment = PlayFragment.newInstance();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("device",mAdapter.getItem(position));
+                playFragment.setArguments(bundle);
 
-        mAdapter.setDatas(cameraDevices);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    setExitTransition(new Fade());
+                    setSharedElementReturnTransition(new DetailTransition());
+//                    fragment.setEnterTransition(new Fade());
+                    playFragment.setSharedElementEnterTransition(new DetailTransition());
+                    // 因为使用add的原因,Material过渡动画只有在进栈时有,返回时没有;
+                    // 如果想进栈和出栈都有过渡动画,需要replace,目前库暂不支持,后续会调研看是否可以支持
+//                    startWithSharedElement(playFragment, ((HomeCameraAdapter.VH) vh).imgCamera, getResources().getString(R.string.image_transition));
+//                    replaceFragment(playFragment,false);
+                } else {
+                    // 这里如果5.0以下系统调用startWithSharedElement(),会无动画,所以低于5.0,start(fragment)
+//                    start(playFragment);
+//                    replaceFragment(playFragment,false);
+                }
+
+            }
+        });
+//        DeviceManagerProxy.getInstance().setProxy(new TestGetCameraProxy());
+       DeviceManagerProxy.getInstance().getCameras(new IResponse<List<CameraDevice>>() {
+           @Override
+           public void onErrorResponse(Object o) {
+               replaceFragment(EmptyDeviceFragment.newInstance(),true);
+           }
+
+           @Override
+           public void onResponse(List<CameraDevice> devices) {
+                if( devices.isEmpty()){
+                    replaceFragment(EmptyDeviceFragment.newInstance(),true);
+                }else{
+                    mAdapter.setDatas(devices);
+                }
+           }
+       });
 
         mRecy.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -155,6 +187,24 @@ public class CamerasFragment extends BaseFragment implements SwipeRefreshLayout.
 
     @Override
     public void onRefresh() {
+
+        DeviceManagerProxy.getInstance().refresh(new IResponse<List<CameraDevice>>() {
+            @Override
+            public void onErrorResponse(Object o) {
+                replaceFragment(EmptyDeviceFragment.newInstance(),true);
+            }
+
+            @Override
+            public void onResponse(List<CameraDevice> devices) {
+                if( devices.isEmpty()){
+                    replaceFragment(EmptyDeviceFragment.newInstance(),true);
+                }else{
+                    mAdapter.setDatas(devices);
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+
         mRefreshLayout.postDelayed(new Runnable() {
             @Override
             public void run() {

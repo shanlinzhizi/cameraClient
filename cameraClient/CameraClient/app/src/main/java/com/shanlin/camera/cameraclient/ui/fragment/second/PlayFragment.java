@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 
 import com.shanlin.camera.cameraclient.R;
 import com.shanlin.camera.cameraclient.base.BaseLazyMainFragment;
+import com.shanlin.camera.cameraclient.ui.fragment.fourth.child.AvatarFragment;
 import com.shanlin.camera.cameraclient.ui.fragment.second.child.ViewPagerFragment;
+import com.shanlin.camera.cameraclient.ui.fragment.second.child.childpager.PlayControllerFragment;
 
 
 /**
@@ -35,12 +37,24 @@ public class PlayFragment extends BaseLazyMainFragment {
 
     private void initView(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
-            loadRootFragment(R.id.fl_second_container, ViewPagerFragment.newInstance());
+           loadFragments();
         }
     }
 
     @Override
     protected void initLazyView(@Nullable Bundle savedInstanceState) {
         // 这里可以不用懒加载,因为Adapter的场景下,Adapter内的子Fragment只有在父Fragment是show状态时,才会被Attach,Create
+        if (savedInstanceState == null) {
+            loadFragments();
+        } else {  // 这里可能会出现该Fragment没被初始化时,就被强杀导致的没有load子Fragment
+            if (findChildFragment(AvatarFragment.class) == null) {
+                loadFragments();
+            }
+        }
+    }
+
+    private void loadFragments(){
+        loadRootFragment(R.id.video_container, ViewPagerFragment.newInstance());
+        loadRootFragment(R.id.controller_container, PlayControllerFragment.newInstance());
     }
 }
