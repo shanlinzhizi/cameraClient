@@ -142,4 +142,12 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+
+    <string-array name="play_type_title">
+        <item>直播</item>
+        <item>远程</item>
+        <item>云播</item>
+    </string-array>
+
 </resources>

@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.shanlin.camera.cameraclient.R;
-import com.shanlin.camera.cameraclient.adapter.ZhihuPagerFragmentAdapter;
+import com.shanlin.camera.cameraclient.adapter.PlayPagerFragmentAdapter;
 import com.shanlin.camera.cameraclient.base.BaseFragment;
 
 
@@ -45,7 +45,7 @@ public class ViewPagerFragment extends BaseFragment {
         mTab.addTab(mTab.newTab());
         mTab.addTab(mTab.newTab());
 
-        mViewPager.setAdapter(new ZhihuPagerFragmentAdapter(getChildFragmentManager()));
+        mViewPager.setAdapter(new PlayPagerFragmentAdapter(getChildFragmentManager()));
         mTab.setupWithViewPager(mViewPager);
     }
 }

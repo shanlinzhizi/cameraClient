@@ -14,20 +14,21 @@ import com.shanlin.camera.cameraclient.base.BaseFragment;
 /**
  * Created by YoKeyword on 16/6/5.
  */
-public class OtherPagerFragment extends BaseFragment {
+public class CloudPagerFragment extends BaseFragment {
     private static final String ARG_TYPE = "arg_pos";
-    public static int TYPE_HOT = 1;
-    public static int TYPE_FAV = 2;
+    public static int TYPE_LIVE = 0;
+    public static int TYPE_SD = 1;
+    public static int TYPE_CLOUD = 2;
 
-    private int mType = TYPE_HOT;
+    private int mType = TYPE_SD;
 
     private TextView mTvTitle;
 
-    public static OtherPagerFragment newInstance(int type) {
+    public static CloudPagerFragment newInstance(int type) {
 
         Bundle args = new Bundle();
         args.putInt(ARG_TYPE, type);
-        OtherPagerFragment fragment = new OtherPagerFragment();
+        CloudPagerFragment fragment = new CloudPagerFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -41,7 +42,7 @@ public class OtherPagerFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.zhihu_fragment_second_pager_other, container, false);
+        View view = inflater.inflate(R.layout.fragment_play_cloud, container, false);
         initView(view);
         return view;
     }
@@ -49,10 +50,6 @@ public class OtherPagerFragment extends BaseFragment {
     private void initView(View view) {
         mTvTitle = (TextView) view.findViewById(R.id.tv_title);
 
-        if (mType == TYPE_HOT) {
-            mTvTitle.setText("热门");
-        } else {
-            mTvTitle.setText("收藏");
-        }
+        mTvTitle.setText(view.getContext().getResources().getStringArray(R.array.play_type_title)[mType]);
     }
 }

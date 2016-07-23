@@ -1,26 +1,54 @@
 package com.shanlin.camera.cameraclient.net;
 
-import android.util.SparseArray;
-
 import com.shanlin.camera.cameraclient.R;
 import com.shanlin.camera.cameraclient.entity.CameraDevice;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 /**
  * Created by feng on 7/20/16.
  */
-public class TestGetCameraProxy implements IGetCamera{
+public class TestGetCameraProxy implements IDeviceManager {
 
     private int[] mImgRes = new int[]{
             R.drawable.img_3, R.drawable.img_4, R.drawable.img_5, R.drawable.img_1, R.drawable.img_2
     };
 
+    private List<CameraDevice> devices = new ArrayList<>();
+
     @Override
-    public List<CameraDevice> getCameras() {
-        List<CameraDevice> cameras = new ArrayList<>();
+    public void getCameras(IResponse response) {
+        generateDevice();
+        if( response != null) {
+            response.onResponse(devices);
+        }
+    }
+
+    @Override
+    public void update(List<CameraDevice> devices, IResponse response) {
+    }
+
+    @Override
+    public void delete(List<CameraDevice> devices, IResponse response) {
+    }
+
+    @Override
+    public void add(List<CameraDevice> devices, IResponse response) {
+    }
+
+    @Override
+    public void refresh(IResponse response) {
+
+        if( response!= null){
+            Collections.shuffle(devices);
+            response.onResponse(devices);
+        }
+    }
+
+    private void generateDevice(){
         CameraDevice camera;
         for(int i = 0; i < 20; i ++){
             camera = new CameraDevice();
@@ -31,8 +59,7 @@ public class TestGetCameraProxy implements IGetCamera{
             camera.setGid("0000" + new Random().nextInt(10)  * 1);
 //            camera.setDeviceType(i % 2);
             camera.setImg(mImgRes[i % 5]);
-            cameras.add(camera);
+            devices.add(camera);
         }
-        return cameras;
     }
 }
