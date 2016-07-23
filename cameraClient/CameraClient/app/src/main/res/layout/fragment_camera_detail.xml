@@ -54,6 +54,17 @@
         android:textColor="@android:color/black"
         android:textSize="18sp"/>
 
+    <CheckBox
+        android:id="@+id/btn_modify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/img_detail"
+        android:layout_marginRight="20dp"
+        android:button="@null"
+        android:background="@android:drawable/ic_menu_edit"
+        />
+
     <include
         layout="@layout/layout_camera_functions"
         android:layout_height="match_parent"

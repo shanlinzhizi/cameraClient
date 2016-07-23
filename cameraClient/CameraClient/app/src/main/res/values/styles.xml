@@ -40,4 +40,27 @@
     <style name="tab_appearance">
         <item name="android:textSize">16sp</item>
     </style>
+    
+    <style name="Wrap_content">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    
+    <style name="Button_square_35dp">
+        <item name="android:layout_height">@dimen/btn_width_35dp</item>
+        <item name="android:layout_width">@dimen/btn_width_35dp</item>
+    </style>
+
+    <style name="Button_rect_45">
+        <item name="android:layout_height">@dimen/btn_width_35dp</item>
+        <item name="android:layout_width">@dimen/btn_height_45dp</item>
+    </style>
+
+    <style name="Text_common">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    
 </resources>
