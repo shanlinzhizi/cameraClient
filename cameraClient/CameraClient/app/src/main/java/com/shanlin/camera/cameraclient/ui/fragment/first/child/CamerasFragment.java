@@ -1,9 +1,11 @@
 package com.shanlin.camera.cameraclient.ui.fragment.first.child;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +27,7 @@ import com.shanlin.camera.cameraclient.listener.OnItemClickListener;
 import com.shanlin.camera.cameraclient.listener.OnItemPlayClickListener;
 import com.shanlin.camera.cameraclient.net.DeviceManagerProxy;
 import com.shanlin.camera.cameraclient.net.IResponse;
+import com.shanlin.camera.cameraclient.ui.PlayActivity;
 import com.shanlin.camera.cameraclient.ui.fragment.second.PlayFragment;
 
 import org.greenrobot.eventbus.EventBus;
@@ -120,25 +123,27 @@ public class CamerasFragment extends BaseFragment implements SwipeRefreshLayout.
         mAdapter.setOnItemPlayClickListener(new OnItemPlayClickListener() {
             @Override
             public void onItemPlayClick(int position, View view, RecyclerView.ViewHolder vh) {
-                PlayFragment  playFragment = PlayFragment.newInstance();
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("device",mAdapter.getItem(position));
-                playFragment.setArguments(bundle);
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    setExitTransition(new Fade());
-                    setSharedElementReturnTransition(new DetailTransition());
-//                    fragment.setEnterTransition(new Fade());
-                    playFragment.setSharedElementEnterTransition(new DetailTransition());
-                    // 因为使用add的原因,Material过渡动画只有在进栈时有,返回时没有;
-                    // 如果想进栈和出栈都有过渡动画,需要replace,目前库暂不支持,后续会调研看是否可以支持
-//                    startWithSharedElement(playFragment, ((HomeCameraAdapter.VH) vh).imgCamera, getResources().getString(R.string.image_transition));
-//                    replaceFragment(playFragment,false);
-                } else {
-                    // 这里如果5.0以下系统调用startWithSharedElement(),会无动画,所以低于5.0,start(fragment)
+//                PlayFragment  playFragment = PlayFragment.newInstance();
+//                Bundle bundle = new Bundle();
+//                bundle.putParcelable("device",mAdapter.getItem(position));
+//                playFragment.setArguments(bundle);
+//
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                    setExitTransition(new Fade());
+//                    setSharedElementReturnTransition(new DetailTransition());
+////                    fragment.setEnterTransition(new Fade());
+//                    playFragment.setSharedElementEnterTransition(new DetailTransition());
+////                    replaceFragment(playFragment,false);
+//                    startWithSharedElement(playFragment,((HomeCameraAdapter.VH)vh).imgCamera,"image_transition");
+//                } else {
+//                    // 这里如果5.0以下系统调用startWithSharedElement(),会无动画,所以低于5.0,start(fragment)
 //                    start(playFragment);
-//                    replaceFragment(playFragment,false);
-                }
+//                }
+                Intent intent = new Intent(getActivity(), PlayActivity.class);
+//                ActivityOptionsCompat optionsCompat = new ActivityOptionsCompat();
+                CameraDevice device = mAdapter.getItem(position);
+                intent.putExtra(PlayActivity.CODE_PRAC_DEVICE,position);
+                startActivity(intent);
 
             }
         });
