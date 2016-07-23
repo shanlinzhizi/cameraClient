@@ -32,7 +32,7 @@ public class ViewPagerFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.zhihu_fragment_second_pager, container, false);
+        View view = inflater.inflate(R.layout.fragment_play_pager, container, false);
         initView(view);
         return view;
     }

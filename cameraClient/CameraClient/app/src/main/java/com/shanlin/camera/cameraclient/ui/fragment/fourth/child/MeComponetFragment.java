@@ -40,7 +40,7 @@ public class MeComponetFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.zhihu_fragment_fourth_me, container, false);
+        View view = inflater.inflate(R.layout.fragment_me_component, container, false);
         initView(view);
         return view;
     }
