@@ -35,6 +35,8 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
+import me.yokeyword.fragmentation.Fragmentation;
+
 /**
  * Created by APhil on 16/7/13.
  */
@@ -185,7 +187,8 @@ public class CamerasFragment extends BaseFragment implements SwipeRefreshLayout.
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(_mActivity, "Action", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(_mActivity, "Action", Toast.LENGTH_SHORT).show();
+                start(AddDeviceFragment.newInstance());
             }
         });
     }

@@ -1,5 +1,7 @@
 package com.shanlin.camera.cameraclient.net.device;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
 import com.shanlin.camera.cameraclient.util.StringUtil;
@@ -37,6 +39,16 @@ public class DeviceRequest {
     public void run(){
         checkAndInitArgs();
         //real connect and send data here
+
+        //check thread while need to show something to UI
+        if(Looper.myLooper() != Looper.getMainLooper()){
+            new Handler(Looper.myLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    //deal with the callback
+                }
+            });
+        }
 
     }
 

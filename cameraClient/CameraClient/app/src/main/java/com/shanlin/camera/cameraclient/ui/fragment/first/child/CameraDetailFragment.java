@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.shanlin.camera.cameraclient.R;
 import com.shanlin.camera.cameraclient.base.BaseBackFragment;
 import com.shanlin.camera.cameraclient.entity.CameraDevice;
+import com.shanlin.camera.cameraclient.ui.PlayActivity;
 import com.shanlin.camera.cameraclient.ui.fragment.CycleFragment;
 
 /**
@@ -92,6 +93,8 @@ public class CameraDetailFragment extends BaseBackFragment
     }
 
     private void setEditable(boolean editable){
-
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(PlayActivity.CODE_PRAC_DEVICE,device);
+        start(EditDeviceFragment.newInstance(bundle));
     }
 }
