@@ -111,6 +111,6 @@ public class CameraDetailFragment extends BaseBackFragment
         DeviceManagerProxy proxy = DeviceManagerProxy.getInstance();
         CameraDevice[] devices = {device};
         proxy.delete(Arrays.asList(devices),null);
-        _mActivity.onBackPressed();
+        startWithPop(CamerasFragment.newInstance());
     }
 }
