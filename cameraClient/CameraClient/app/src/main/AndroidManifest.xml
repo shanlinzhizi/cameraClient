@@ -36,7 +36,7 @@
 
         </activity>
 
-        <activity android:name=".ui.fragment.fourth.LoginActivity"/>
+        <activity android:name=".ui.fragment.me.LoginActivity"/>
 
         <activity android:name=".ui.PlayActivity"/>
 

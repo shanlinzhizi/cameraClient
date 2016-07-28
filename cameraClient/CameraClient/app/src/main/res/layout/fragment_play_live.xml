@@ -28,7 +28,7 @@
         android:id="@+id/relativelayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/video_window0"
+        android:layout_alignBottom="@+id/video_window0"
         android:orientation="horizontal" >
 
         <TextView

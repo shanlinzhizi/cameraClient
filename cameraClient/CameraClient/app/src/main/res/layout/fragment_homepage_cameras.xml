@@ -29,5 +29,5 @@
         android:layout_gravity="right|bottom"
         android:layout_marginBottom="24dp"
         android:layout_marginRight="24dp"
-        android:src="@drawable/ic_home_white_24dp"/>
+        android:src="@android:drawable/ic_input_add"/>
 </FrameLayout>

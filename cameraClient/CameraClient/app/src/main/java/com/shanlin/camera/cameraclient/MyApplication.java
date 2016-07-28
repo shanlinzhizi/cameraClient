@@ -8,6 +8,7 @@ import com.shanlin.camera.cameraclient.net.DeviceManagerProxy;
 import com.shanlin.camera.cameraclient.net.SqlDeviceManager;
 
 import com.shanlin.camera.cameraclient.net.UserBzs;
+import com.sl.SLService;
 
 /**
  * Created by feng on 7/20/16.
@@ -42,12 +43,22 @@ public class MyApplication extends Application {
     }
 
     private void initDeviceConnectionService(){
-//        SLService.SLDeviceInfo deviceInfo = new SLService.SLDeviceInfo();
-//        deviceInfo.sid = "client002";
-//        deviceInfo.passwd = "client002";
+        SLService.SLDeviceInfo deviceInfo = new SLService.SLDeviceInfo();
+//        deviceInfo.sid = "dev6";
+//        deviceInfo.passwd = "88888888";
 //        SLService slService = SLService.getInstance();
 //        slService.init(this,deviceInfo);
 //        slService.start();
+
+        SLService.SLDeviceInfo info = new SLService.SLDeviceInfo();
+        info.sid = "client003";
+        info.passwd = "client003";
+
+        SLService service = SLService.getInstance();
+        service.init(getContext(), info);
+
+        service.start();
+
     }
 
     public static Context getContext(){

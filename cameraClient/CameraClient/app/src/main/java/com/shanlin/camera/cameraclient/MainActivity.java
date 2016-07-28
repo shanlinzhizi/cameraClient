@@ -5,13 +5,13 @@ import android.support.annotation.Nullable;
 
 import com.shanlin.camera.cameraclient.base.BaseLazyMainFragment;
 import com.shanlin.camera.cameraclient.event.TabSelectedEvent;
-import com.shanlin.camera.cameraclient.ui.fragment.first.HomePageFragment;
-import com.shanlin.camera.cameraclient.ui.fragment.fourth.MeFragment;
-import com.shanlin.camera.cameraclient.ui.fragment.fourth.child.MeComponetFragment;
-import com.shanlin.camera.cameraclient.ui.fragment.second.PlayFragment;
-import com.shanlin.camera.cameraclient.ui.fragment.second.child.ViewPagerFragment;
-import com.shanlin.camera.cameraclient.ui.fragment.third.CameraInfoFragment;
-import com.shanlin.camera.cameraclient.ui.fragment.third.child.ShopFragment;
+import com.shanlin.camera.cameraclient.ui.fragment.home.HomePageFragment;
+import com.shanlin.camera.cameraclient.ui.fragment.me.MeFragment;
+import com.shanlin.camera.cameraclient.ui.fragment.me.child.MeComponetFragment;
+import com.shanlin.camera.cameraclient.ui.fragment.liveplay.PlayFragment;
+import com.shanlin.camera.cameraclient.ui.fragment.liveplay.child.ViewPagerFragment;
+import com.shanlin.camera.cameraclient.ui.fragment.shop.ShopCityFragment;
+import com.shanlin.camera.cameraclient.ui.fragment.shop.child.ShopFragment;
 import com.shanlin.camera.cameraclient.ui.view.BottomBar;
 import com.shanlin.camera.cameraclient.ui.view.BottomBarTab;
 
@@ -45,7 +45,7 @@ public class MainActivity extends SupportActivity implements BaseLazyMainFragmen
         if (savedInstanceState == null) {
             mFragments[FIRST] = HomePageFragment.newInstance();
             mFragments[SECOND] = PlayFragment.newInstance();
-            mFragments[THIRD] = CameraInfoFragment.newInstance();
+            mFragments[THIRD] = ShopCityFragment.newInstance();
             mFragments[FOURTH] = MeFragment.newInstance();
 
             loadMultipleRootFragment(R.id.fl_container, FIRST,
@@ -53,13 +53,14 @@ public class MainActivity extends SupportActivity implements BaseLazyMainFragmen
                     mFragments[SECOND],
                     mFragments[THIRD],
                     mFragments[FOURTH]);
+
         } else {
             // 这里库已经做了Fragment恢复,所有不需要额外的处理了, 不会出现重叠问题
 
             // 这里我们需要拿到mFragments的引用,也可以通过getSupportFragmentManager.getFragments()自行进行判断查找(效率更高些),用下面的方法查找更方便些
             mFragments[FIRST] = findFragment(HomePageFragment.class);
             mFragments[SECOND] = findFragment(PlayFragment.class);
-            mFragments[THIRD] = findFragment(CameraInfoFragment.class);
+            mFragments[THIRD] = findFragment(ShopCityFragment.class);
             mFragments[FOURTH] = findFragment(MeFragment.class);
         }
 
@@ -76,7 +77,7 @@ public class MainActivity extends SupportActivity implements BaseLazyMainFragmen
 
         mBottomBar.addItem(new BottomBarTab(this, R.drawable.ic_home_white_24dp))
                 .addItem(new BottomBarTab(this, R.drawable.ic_discover_white_24dp))
-                .addItem(new BottomBarTab(this, R.drawable.ic_message_white_24dp))
+                .addItem(new BottomBarTab(this,R.drawable.ic_message_white_24dp))
                 .addItem(new BottomBarTab(this, R.drawable.ic_account_circle_white_24dp));
 
         mBottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
@@ -101,7 +102,7 @@ public class MainActivity extends SupportActivity implements BaseLazyMainFragmen
                         currentFragment.popToChild(HomePageFragment.class, false);
                     } else if (currentFragment instanceof PlayFragment) {
                         currentFragment.popToChild(ViewPagerFragment.class, false);
-                    } else if (currentFragment instanceof CameraInfoFragment) {
+                    } else if (currentFragment instanceof ShopCityFragment) {
                         currentFragment.popToChild(ShopFragment.class, false);
                     } else if (currentFragment instanceof MeFragment) {
                         currentFragment.popToChild(MeComponetFragment.class, false);

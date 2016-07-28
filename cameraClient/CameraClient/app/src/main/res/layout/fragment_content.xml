@@ -5,6 +5,12 @@
               android:gravity="center"
               android:orientation="vertical">
 
+    <ImageView
+        android:id="@+id/img_camera"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/img_3"
+        />
     <TextView
         android:id="@+id/tv_content"
         android:layout_width="match_parent"

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.shanlin.camera.cameraclient.ui.fragment.first.HomePageFragment;
+import com.shanlin.camera.cameraclient.ui.fragment.home.HomePageFragment;
 
 
 /**
