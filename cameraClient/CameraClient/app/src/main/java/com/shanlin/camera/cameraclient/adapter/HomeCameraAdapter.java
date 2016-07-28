@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -173,10 +174,11 @@ public class HomeCameraAdapter extends RecyclerView.Adapter<HomeCameraAdapter.VH
 
         @Override
         public void inflateFromModel(CameraDevice device, final OnItemClickListener listener) {
-            imgCamera.setImageResource(device.getImg());
+            int imgRes = device.getImg();
+            imgCamera.setImageResource((imgRes == 0 ? R.drawable.img_1 : imgRes));
             tvDeviceName.setText(device.getNickName());
             tvGid.setText(device.getGid());
-            tvDeviceDesc.setText(device.getDesc());
+            tvDeviceDesc.setText(TextUtils.isEmpty(device.getDesc()) ? "null" : device.getDesc());
 
         }
     }
@@ -189,10 +191,11 @@ public class HomeCameraAdapter extends RecyclerView.Adapter<HomeCameraAdapter.VH
 
         @Override
         public void inflateFromModel(CameraDevice device,OnItemClickListener listener) {
-            imgCamera.setImageResource(device.getImg());
+            int imgRes = device.getImg();
+            imgCamera.setImageResource((imgRes == 0 ? R.drawable.img_1 : imgRes));
             tvDeviceName.setText(device.getNickName());
             tvGid.setText("personal "+device.getGid());
-            tvDeviceDesc.setText(device.getDesc());
+            tvDeviceDesc.setText(TextUtils.isEmpty(device.getDesc()) ? "null" : device.getDesc());
         }
     }
 

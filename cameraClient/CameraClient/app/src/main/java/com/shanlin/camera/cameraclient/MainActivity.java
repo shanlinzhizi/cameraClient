@@ -39,7 +39,7 @@ public class MainActivity extends SupportActivity implements BaseLazyMainFragmen
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.zhihu_activity_main);
+        setContentView(R.layout.activity_main);
 //        EventBus.getDefault().register(this);
 
         if (savedInstanceState == null) {

@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="fragmentation-0.7.7">
+    <ANNOTATIONS>
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/me.yokeyword/fragmentation/0.7.7/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/me.yokeyword/fragmentation/0.7.7/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/me.yokeyword/fragmentation/0.7.7/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/me.yokeyword/fragmentation/0.7.7/860088be08f52f3b53e678e4c929bbcd55885f29/fragmentation-0.7.7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

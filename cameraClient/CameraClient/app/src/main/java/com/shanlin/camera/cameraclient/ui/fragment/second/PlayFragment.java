@@ -37,8 +37,9 @@ public class PlayFragment extends BaseLazyMainFragment {
 
     private void initView(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
-           loadFragments();
+            loadFragments();
         }
+
     }
 
     @Override

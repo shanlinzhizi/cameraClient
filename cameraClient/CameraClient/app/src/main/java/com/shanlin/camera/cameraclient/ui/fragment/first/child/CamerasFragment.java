@@ -1,5 +1,6 @@
 package com.shanlin.camera.cameraclient.ui.fragment.first.child;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,7 +13,6 @@ import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.shanlin.camera.cameraclient.MainActivity;
 import com.shanlin.camera.cameraclient.R;
@@ -25,7 +25,8 @@ import com.shanlin.camera.cameraclient.listener.OnItemClickListener;
 import com.shanlin.camera.cameraclient.listener.OnItemPlayClickListener;
 import com.shanlin.camera.cameraclient.net.DeviceManagerProxy;
 import com.shanlin.camera.cameraclient.net.IResponse;
-import com.shanlin.camera.cameraclient.ui.fragment.second.PlayFragment;
+import com.shanlin.camera.cameraclient.ui.PlayActivity;
+
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -80,6 +81,12 @@ public class CamerasFragment extends BaseFragment implements SwipeRefreshLayout.
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+//        onRefresh();
+    }
+
     private void initView(View view) {
         mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
         mRecy = (RecyclerView) view.findViewById(R.id.recy);
@@ -120,44 +127,33 @@ public class CamerasFragment extends BaseFragment implements SwipeRefreshLayout.
         mAdapter.setOnItemPlayClickListener(new OnItemPlayClickListener() {
             @Override
             public void onItemPlayClick(int position, View view, RecyclerView.ViewHolder vh) {
-                PlayFragment  playFragment = PlayFragment.newInstance();
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("device",mAdapter.getItem(position));
-                playFragment.setArguments(bundle);
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    setExitTransition(new Fade());
-                    setSharedElementReturnTransition(new DetailTransition());
-//                    fragment.setEnterTransition(new Fade());
-                    playFragment.setSharedElementEnterTransition(new DetailTransition());
-                    // 因为使用add的原因,Material过渡动画只有在进栈时有,返回时没有;
-                    // 如果想进栈和出栈都有过渡动画,需要replace,目前库暂不支持,后续会调研看是否可以支持
-//                    startWithSharedElement(playFragment, ((HomeCameraAdapter.VH) vh).imgCamera, getResources().getString(R.string.image_transition));
-//                    replaceFragment(playFragment,false);
-                } else {
-                    // 这里如果5.0以下系统调用startWithSharedElement(),会无动画,所以低于5.0,start(fragment)
+//                PlayFragment  playFragment = PlayFragment.newInstance();
+//                Bundle bundle = new Bundle();
+//                bundle.putParcelable("device",mAdapter.getItem(position));
+//                playFragment.setArguments(bundle);
+//
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                    setExitTransition(new Fade());
+//                    setSharedElementReturnTransition(new DetailTransition());
+////                    fragment.setEnterTransition(new Fade());
+//                    playFragment.setSharedElementEnterTransition(new DetailTransition());
+////                    replaceFragment(playFragment,false);
+//                    startWithSharedElement(playFragment,((HomeCameraAdapter.VH)vh).imgCamera,"image_transition");
+//                } else {
+//                    // 这里如果5.0以下系统调用startWithSharedElement(),会无动画,所以低于5.0,start(fragment)
 //                    start(playFragment);
-//                    replaceFragment(playFragment,false);
-                }
+//                }
+                Intent intent = new Intent(getActivity(), PlayActivity.class);
+//                ActivityOptionsCompat optionsCompat = new ActivityOptionsCompat();
+                CameraDevice device = mAdapter.getItem(position);
+                intent.putExtra(PlayActivity.CODE_PRAC_DEVICE,position);
+                startActivity(intent);
 
             }
         });
-//        DeviceManagerProxy.getInstance().setProxy(new TestGetCameraProxy());
-       DeviceManagerProxy.getInstance().getCameras(new IResponse<List<CameraDevice>>() {
-           @Override
-           public void onErrorResponse(Object o) {
-               replaceFragment(EmptyDeviceFragment.newInstance(),true);
-           }
 
-           @Override
-           public void onResponse(List<CameraDevice> devices) {
-                if( devices.isEmpty()){
-                    replaceFragment(EmptyDeviceFragment.newInstance(),true);
-                }else{
-                    mAdapter.setDatas(devices);
-                }
-           }
-       });
+        onRefresh();
 
         mRecy.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -180,7 +176,8 @@ public class CamerasFragment extends BaseFragment implements SwipeRefreshLayout.
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(_mActivity, "Action", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(_mActivity, "Action", Toast.LENGTH_SHORT).show();
+                start(AddDeviceFragment.newInstance(),SINGLETOP);
             }
         });
     }
@@ -191,13 +188,17 @@ public class CamerasFragment extends BaseFragment implements SwipeRefreshLayout.
         DeviceManagerProxy.getInstance().refresh(new IResponse<List<CameraDevice>>() {
             @Override
             public void onErrorResponse(Object o) {
-                replaceFragment(EmptyDeviceFragment.newInstance(),true);
+
+                startWithPop(EmptyDeviceFragment.newInstance());
+
             }
 
             @Override
             public void onResponse(List<CameraDevice> devices) {
                 if( devices.isEmpty()){
-                    replaceFragment(EmptyDeviceFragment.newInstance(),true);
+
+                    startWithPop(EmptyDeviceFragment.newInstance());
+
                 }else{
                     mAdapter.setDatas(devices);
                     mAdapter.notifyDataSetChanged();

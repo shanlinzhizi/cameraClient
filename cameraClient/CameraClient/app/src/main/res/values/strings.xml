@@ -143,9 +143,26 @@
         completions."
     </string>
 
+
+
+
     <string-array name="play_type_title">
         <item>直播</item>
         <item>远程</item>
         <item>云播</item>
     </string-array>
+
+
+    <string name="promt_device_sid">Device Sid</string>
+    <string name="promt_device_nickname">Device NickName</string>
+    <string name="promt_device_user">Device User</string>
+    <string name="promt_device_pwd">Device Password</string>
+
+    <string name="title_add_device">Add Device</string>
+    <string name="title_edit_device">Edit Device</string>
+
+    <string name="error_empty_str">Filed is Null!</string>
+    <string name="btn_delete">delete</string>
+
+
 </resources>

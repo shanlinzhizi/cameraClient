@@ -10,4 +10,8 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="bottombar_height">48dp</dimen>
     <dimen name="bottombar_wechat_height">52dp</dimen>
+
+    <dimen name="btn_height_45dp">45dp</dimen>
+    <dimen name="btn_width_35dp">35dp</dimen>
+    <dimen name="component_margin_top">12dp</dimen>
 </resources>

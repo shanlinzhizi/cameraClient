@@ -54,6 +54,29 @@
         android:textColor="@android:color/black"
         android:textSize="18sp"/>
 
+    <CheckBox
+        android:id="@+id/btn_modify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_alignTop="@+id/img_detail"
+
+        android:button="@null"
+        android:background="@android:drawable/ic_menu_edit"
+        />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/btn_height_45dp"
+        android:layout_below="@+id/btn_modify"
+        android:layout_alignRight="@+id/btn_modify"
+        android:background="@android:color/holo_red_light"
+        android:text="@string/btn_delete"
+        />
+
+
     <include
         layout="@layout/layout_camera_functions"
         android:layout_height="match_parent"
