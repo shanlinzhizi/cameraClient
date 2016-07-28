@@ -1,35 +1,20 @@
 package com.shanlin.camera.cameraclient.ui.fragment.second.child.childpager;
 
-import android.content.res.Configuration;
-import android.graphics.Matrix;
-import android.graphics.Rect;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.shanlin.camera.cameraclient.R;
 import com.shanlin.camera.cameraclient.base.BaseFragment;
-import com.shanlin.camera.cameraclient.entity.CameraDevice;
-import com.shanlin.camera.cameraclient.ui.PlayActivity;
-import com.sl.media.AView;
-import com.sl.media.AViewRenderer;
-import com.sl.media.MediaPlayer;
-import com.sl.media.SLDataSource;
-import com.sl.media.SLDataSourceListener;
-import com.sl.media.VideoRenderer;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+//import com.sl.media.AView;
+//import com.sl.media.AViewRenderer;
+//import com.sl.media.MediaPlayer;
+//import com.sl.media.SLDataSource;
+//import com.sl.media.SLDataSourceListener;
+//import com.sl.media.VideoRenderer;
 
 /**
  * Created by YoKeyword on 16/6/3.

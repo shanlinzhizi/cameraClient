@@ -3,25 +3,45 @@ package com.shanlin.camera.cameraclient.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+import com.shanlin.camera.cameraclient.R;
+
 /**
  * Created by APhil on 16/7/13.
  */
+@DatabaseTable(tableName = CameraDevice.table_name)
 public class CameraDevice implements Parcelable{
 
+    public static final String table_name = "tb_device";
+    public static final String COLUM_NICKNAME = "nickname";
+    public static final String COLUM_SID = "sid";
+    public static final String COLUM_AS_USERNAME = "devce_username";
+    public static final String COLUM_AS_PWD  = "device_pwd";
+    public static final String COLUM_IMG = "img";
+    public static final String COLUM_DESC = "desc";
+    public static final String COLUM_DEVICE_TYPE = "type";
 
+
+    @DatabaseField(columnName = COLUM_NICKNAME)
     private String nickName;
 
+    @DatabaseField(columnName = COLUM_SID, id = true)
     private String gid;
 
+    @DatabaseField(columnName = COLUM_AS_USERNAME)
     private String accessName;
 
-
+    @DatabaseField(columnName = COLUM_AS_PWD)
     private String accessPwd;
 
+    @DatabaseField(columnName = COLUM_IMG)
     private int img;
 
+    @DatabaseField(columnName = COLUM_DESC)
     private String desc;
 
+    @DatabaseField(columnName = COLUM_DEVICE_TYPE)
     private int deviceType ;
 
     public String getNickName() {
@@ -57,7 +77,7 @@ public class CameraDevice implements Parcelable{
     }
 
     public int getImg() {
-        return img;
+        return (img == 0 ? R.drawable.img_1 : img);
     }
 
     public void setImg(int img) {

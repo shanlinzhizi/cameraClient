@@ -16,4 +16,20 @@ public class StringUtil {
         }
         return result;
     }
+
+    public static boolean isValidateSid(String sid){
+        return true;
+    }
+
+    public static boolean isValidateUserName(String userName){
+        return true;
+    }
+
+    public static boolean isValidatePwd(String pwd){
+        return true;
+    }
+
+    public static boolean isValidateNickName(String nickName){
+        return true;
+    }
 }

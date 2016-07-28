@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,8 +15,11 @@ import android.widget.TextView;
 import com.shanlin.camera.cameraclient.R;
 import com.shanlin.camera.cameraclient.base.BaseBackFragment;
 import com.shanlin.camera.cameraclient.entity.CameraDevice;
+import com.shanlin.camera.cameraclient.net.DeviceManagerProxy;
 import com.shanlin.camera.cameraclient.ui.PlayActivity;
 import com.shanlin.camera.cameraclient.ui.fragment.CycleFragment;
+
+import java.util.Arrays;
 
 /**
  * Created by APhil on 16/7/14.
@@ -33,6 +37,7 @@ public class CameraDetailFragment extends BaseBackFragment
     private TextView mTvDesc;
     private TextView mTvGid;
     private CheckBox mCbxModify;
+    private Button mBtnDelete;
 
 
     public static CameraDetailFragment newInstance(CameraDevice cameraDevice){
@@ -64,6 +69,7 @@ public class CameraDetailFragment extends BaseBackFragment
         mTvDesc = (TextView) view.findViewById(R.id.tv_desc_test);
         mTvGid = (TextView) view.findViewById(R.id.tv_gid);
         mCbxModify = (CheckBox) view.findViewById(R.id.btn_modify);
+        mBtnDelete = (Button) view.findViewById(R.id.btn_delete);
 
         mToolbar.setTitle("");
         initToolbarNav(mToolbar);
@@ -73,7 +79,7 @@ public class CameraDetailFragment extends BaseBackFragment
         mTvGid.setText(device.getGid());
         mImgDetail.setOnClickListener(this);
         mCbxModify.setOnClickListener(this);
-
+        mBtnDelete.setOnClickListener(this);
     }
 
     @Override
@@ -89,6 +95,9 @@ public class CameraDetailFragment extends BaseBackFragment
                }
                setEditable(editable);
                break;
+           case R.id.btn_delete:
+               deleteDevice();
+               break;
        }
     }
 
@@ -96,5 +105,12 @@ public class CameraDetailFragment extends BaseBackFragment
         Bundle bundle = new Bundle();
         bundle.putParcelable(PlayActivity.CODE_PRAC_DEVICE,device);
         start(EditDeviceFragment.newInstance(bundle));
+    }
+
+    private void deleteDevice(){
+        DeviceManagerProxy proxy = DeviceManagerProxy.getInstance();
+        CameraDevice[] devices = {device};
+        proxy.delete(Arrays.asList(devices),null);
+        _mActivity.onBackPressed();
     }
 }

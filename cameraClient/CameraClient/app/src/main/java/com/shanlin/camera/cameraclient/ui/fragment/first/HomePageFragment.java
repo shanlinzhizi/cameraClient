@@ -36,6 +36,22 @@ public class HomePageFragment extends BaseLazyMainFragment {
     protected void initLazyView(@Nullable Bundle savedInstanceState) {
         if (savedInstanceState == null) {
 //            loadRootFragment(R.id.fl_first_container, FirstHomeFragment.newInstance());
+//            DeviceManagerProxy.getInstance().getCameras(new IResponse<List<CameraDevice>>() {
+//                @Override
+//                public void onErrorResponse(Object o) {
+//                    loadRootFragment(R.id.fl_first_container, EmptyDeviceFragment.newInstance());
+//                }
+//
+//                @Override
+//                public void onResponse(List<CameraDevice> o) {
+//                    if( o.isEmpty()){
+//                        loadRootFragment(R.id.fl_first_container, EmptyDeviceFragment.newInstance());
+//                    }else{
+//                        loadRootFragment(R.id.fl_first_container, CamerasFragment.newInstance());
+//
+//                    }
+//                }
+//            });
             loadRootFragment(R.id.fl_first_container, CamerasFragment.newInstance());
         }
     }

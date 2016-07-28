@@ -13,7 +13,7 @@ import me.yokeyword.fragmentation.SupportFragment;
 /**
  * Created by APhil on 16/7/21.
  */
-public class PlayControllerFragment extends SupportFragment {
+public class PlayControllerFragment extends SupportFragment implements View.OnClickListener{
 
     public static PlayControllerFragment newInstance(){
 
@@ -26,5 +26,10 @@ public class PlayControllerFragment extends SupportFragment {
         View view = inflater.inflate(R.layout.fragment_play_controller, container, false);
 
         return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

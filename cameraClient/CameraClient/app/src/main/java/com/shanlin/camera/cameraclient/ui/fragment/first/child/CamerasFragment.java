@@ -5,7 +5,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +13,6 @@ import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.shanlin.camera.cameraclient.MainActivity;
 import com.shanlin.camera.cameraclient.R;
@@ -28,14 +26,11 @@ import com.shanlin.camera.cameraclient.listener.OnItemPlayClickListener;
 import com.shanlin.camera.cameraclient.net.DeviceManagerProxy;
 import com.shanlin.camera.cameraclient.net.IResponse;
 import com.shanlin.camera.cameraclient.ui.PlayActivity;
-import com.shanlin.camera.cameraclient.ui.fragment.second.PlayFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
-
-import me.yokeyword.fragmentation.Fragmentation;
 
 /**
  * Created by APhil on 16/7/13.
@@ -83,6 +78,12 @@ public class CamerasFragment extends BaseFragment implements SwipeRefreshLayout.
         EventBus.getDefault().register(this);
         initView(view);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+//        onRefresh();
     }
 
     private void initView(View view) {
@@ -149,22 +150,8 @@ public class CamerasFragment extends BaseFragment implements SwipeRefreshLayout.
 
             }
         });
-//        DeviceManagerProxy.getInstance().setProxy(new TestGetCameraProxy());
-        DeviceManagerProxy.getInstance().getCameras(new IResponse<List<CameraDevice>>() {
-            @Override
-            public void onErrorResponse(Object o) {
-                replaceFragment(EmptyDeviceFragment.newInstance(),true);
-            }
 
-            @Override
-            public void onResponse(List<CameraDevice> devices) {
-                if( devices.isEmpty()){
-                    replaceFragment(EmptyDeviceFragment.newInstance(),true);
-                }else{
-                    mAdapter.setDatas(devices);
-                }
-            }
-        });
+        onRefresh();
 
         mRecy.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -188,7 +175,7 @@ public class CamerasFragment extends BaseFragment implements SwipeRefreshLayout.
             @Override
             public void onClick(View v) {
 //                Toast.makeText(_mActivity, "Action", Toast.LENGTH_SHORT).show();
-                start(AddDeviceFragment.newInstance());
+                start(AddDeviceFragment.newInstance(),SINGLETOP);
             }
         });
     }
@@ -199,13 +186,13 @@ public class CamerasFragment extends BaseFragment implements SwipeRefreshLayout.
         DeviceManagerProxy.getInstance().refresh(new IResponse<List<CameraDevice>>() {
             @Override
             public void onErrorResponse(Object o) {
-                replaceFragment(EmptyDeviceFragment.newInstance(),true);
+                startWithPop(EmptyDeviceFragment.newInstance());
             }
 
             @Override
             public void onResponse(List<CameraDevice> devices) {
                 if( devices.isEmpty()){
-                    replaceFragment(EmptyDeviceFragment.newInstance(),true);
+                    startWithPop(EmptyDeviceFragment.newInstance());
                 }else{
                     mAdapter.setDatas(devices);
                     mAdapter.notifyDataSetChanged();

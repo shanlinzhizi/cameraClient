@@ -5,6 +5,11 @@
 
     >
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_marginTop="?actionBarSize"
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -12,6 +17,9 @@
         android:gravity="center"
         android:layout_centerInParent="true"
         >
+
+
+
 
         <android.support.design.widget.FloatingActionButton
             android:layout_width="80dp"
@@ -29,14 +37,18 @@
 
     </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/empty_promt_shop"
+            android:layout_marginBottom="20dp"
+            />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/empty_promt_shop"
-        android:layout_marginBottom="20dp"
-        />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+
 
 </RelativeLayout>

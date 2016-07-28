@@ -20,4 +20,15 @@
         layout="@layout/layout_device_base_info"
         />
 
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_save"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/btn_height_45dp"
+        android:layout_marginTop="@dimen/component_margin_top"
+        android:layout_gravity="center"
+        android:background="@android:color/holo_blue_light"
+        android:text="@android:string/yes"
+        />
+
+
 </LinearLayout>
