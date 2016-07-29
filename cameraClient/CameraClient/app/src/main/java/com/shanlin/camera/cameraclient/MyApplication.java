@@ -6,6 +6,7 @@ import android.content.Context;
 import com.shanlin.camera.cameraclient.net.DeviceManagerProxy;
 import com.shanlin.camera.cameraclient.net.SqlDeviceManager;
 import com.shanlin.camera.cameraclient.net.UserBzs;
+import com.sl.SLService;
 
 /**
  * Created by feng on 7/20/16.
@@ -47,14 +48,14 @@ public class MyApplication extends Application {
 //        slService.init(this,deviceInfo);
 //        slService.start();
 
-//        SLService.SLDeviceInfo info = new SLService.SLDeviceInfo();
-//        info.sid = "client003";
-//        info.passwd = "client003";
-//
-//        SLService service = SLService.getInstance();
-//        service.init(getContext(), info);
-//
-//        service.start();
+        SLService.SLDeviceInfo info = new SLService.SLDeviceInfo();
+        info.sid = "client003";
+        info.passwd = "client003";
+
+        SLService service = SLService.getInstance();
+        service.init(getContext(), info);
+
+        service.start();
 
     }
 
