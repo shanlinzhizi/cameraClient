@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.shanlin.camera.cameraclient.R;
 import com.shanlin.camera.cameraclient.base.BaseBackFragment;
-import com.shanlin.camera.cameraclient.ui.fragment.ShopCameraDetailFragment;
+import com.shanlin.camera.cameraclient.ui.fragment.shop.ShopCameraDetailFragment;
 
 /**
  * Created by YoKeyword on 16/2/7.

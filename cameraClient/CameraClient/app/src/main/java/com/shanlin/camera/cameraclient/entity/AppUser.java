@@ -1,7 +1,10 @@
 package com.shanlin.camera.cameraclient.entity;
 
+import android.text.TextUtils;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import com.shanlin.camera.cameraclient.R;
 
 /**
  * Created by APhil on 16/7/21.
@@ -51,8 +54,12 @@ public class AppUser {
         this.nickName = nickName;
     }
 
-    public String getUserImg() {
-        return userImg;
+    public int getUserImg() {
+        int id = 0;
+        if(!TextUtils.isEmpty(userImg)) {
+            id = Integer.valueOf(userImg);
+        }
+        return id < 1 ? R.drawable.img_5 : id;
     }
 
     public void setUserImg(String userImg) {

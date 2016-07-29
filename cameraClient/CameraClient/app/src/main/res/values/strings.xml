@@ -164,5 +164,19 @@
     <string name="error_empty_str">Filed is Null!</string>
     <string name="btn_delete">delete</string>
 
+    <string-array name="live_type_title">
+        <item>热门</item>
+        <item>频道</item>
+        <item>收藏</item>
+    </string-array>
 
+    <string name="help">help</string>
+    <string name="help_app_info">
+        This is Camera Device live play \n
+        for more info, \n
+        please contact \n
+        phone: 110-120-119\n
+    </string>
+
+    <string name="logout">注销</string>
 </resources>

@@ -16,7 +16,7 @@ import com.shanlin.camera.cameraclient.R;
 import com.shanlin.camera.cameraclient.entity.CameraDevice;
 import com.shanlin.camera.cameraclient.listener.OnItemClickListener;
 import com.shanlin.camera.cameraclient.listener.OnItemPlayClickListener;
-import com.shanlin.camera.cameraclient.ui.PlayActivity;
+import com.shanlin.camera.cameraclient.ui.fragment.play.PlayActivity;
 
 import java.util.ArrayList;
 import java.util.List;

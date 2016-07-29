@@ -25,7 +25,7 @@ import com.shanlin.camera.cameraclient.listener.OnItemClickListener;
 import com.shanlin.camera.cameraclient.listener.OnItemPlayClickListener;
 import com.shanlin.camera.cameraclient.net.DeviceManagerProxy;
 import com.shanlin.camera.cameraclient.net.IResponse;
-import com.shanlin.camera.cameraclient.ui.PlayActivity;
+import com.shanlin.camera.cameraclient.ui.fragment.play.PlayActivity;
 
 
 import org.greenrobot.eventbus.EventBus;

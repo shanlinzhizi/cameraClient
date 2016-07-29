@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/btn_height_45dp"
+    android:layout_marginTop="@dimen/component_margin_top"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginBottom="5dp"
+    >
+
+    <ImageView
+        android:id="@+id/user_icon"
+        android:layout_width="@dimen/btn_width_35dp"
+        android:layout_height="@dimen/btn_width_35dp"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_1"
+        />
+
+    <TextView
+        android:id="@+id/tv_device_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/user_icon"
+        android:layout_marginLeft="5dp"
+        android:textSize="18sp"
+        android:textColor="@android:color/background_dark"
+        android:text="device name"
+        />
+
+    <TextView
+        android:id="@+id/tv_device_company"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_device_name"
+        android:layout_alignLeft="@+id/tv_device_name"
+        android:layout_marginLeft="5dp"
+        android:textSize="16sp"
+        android:textColor="@android:color/darker_gray"
+        android:text="company name"
+        />
+
+    <!--right-->
+
+    <TextView
+        android:id="@+id/tv_msg_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@+id/tv_device_name"
+        android:drawableLeft="@android:drawable/sym_action_email"
+        android:text="123"
+        />
+
+    <TextView
+        android:id="@+id/tv_like_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/tv_msg_count"
+        android:layout_marginRight="12dp"
+        android:layout_alignBottom="@+id/tv_device_name"
+        android:drawableLeft="@android:drawable/arrow_up_float"
+        android:text="333"
+        />
+
+    <TextView
+        android:id="@+id/tv_watching_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:text="4444人观看"
+        />
+
+
+
+</RelativeLayout>

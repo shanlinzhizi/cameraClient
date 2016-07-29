@@ -30,7 +30,6 @@ public class SettingsFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_phone_setting, container, false);
-
         initView(view);
         return view;
     }
@@ -42,14 +41,14 @@ public class SettingsFragment extends BaseFragment {
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                _mActivity.onBackPressed();
+               onBackPressedSupport();
             }
         });
     }
 
     @Override
     public boolean onBackPressedSupport() {
-        pop();
+        startWithPop(AvatarFragment.newInstance());
         return true;
     }
 }

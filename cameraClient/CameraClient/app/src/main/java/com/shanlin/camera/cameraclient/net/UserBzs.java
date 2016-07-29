@@ -7,7 +7,7 @@ import com.shanlin.camera.cameraclient.entity.AppUser;
  * The ApplicationContext used in here is better
  */
 public class UserBzs {
-    private static boolean isLogin = false;
+    private static boolean isLogin = true;
 
     public static boolean isLogin(){
         return isLogin;
@@ -35,7 +35,7 @@ public class UserBzs {
      *
      * @return get user info from local
      */
-    private static AppUser getAppUser(){
+    public static AppUser getAppUser(){
         return new AppUser();
     }
 

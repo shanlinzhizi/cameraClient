@@ -6,10 +6,10 @@ import android.support.annotation.Nullable;
 import com.shanlin.camera.cameraclient.base.BaseLazyMainFragment;
 import com.shanlin.camera.cameraclient.event.TabSelectedEvent;
 import com.shanlin.camera.cameraclient.ui.fragment.home.HomePageFragment;
+import com.shanlin.camera.cameraclient.ui.fragment.liveplay.LivePlayPagerFragment;
 import com.shanlin.camera.cameraclient.ui.fragment.me.MeFragment;
 import com.shanlin.camera.cameraclient.ui.fragment.me.child.MeComponetFragment;
-import com.shanlin.camera.cameraclient.ui.fragment.liveplay.PlayFragment;
-import com.shanlin.camera.cameraclient.ui.fragment.liveplay.child.ViewPagerFragment;
+import com.shanlin.camera.cameraclient.ui.fragment.play.PlayTypePagerFragment;
 import com.shanlin.camera.cameraclient.ui.fragment.shop.ShopCityFragment;
 import com.shanlin.camera.cameraclient.ui.fragment.shop.child.ShopFragment;
 import com.shanlin.camera.cameraclient.ui.view.BottomBar;
@@ -44,7 +44,7 @@ public class MainActivity extends SupportActivity implements BaseLazyMainFragmen
 
         if (savedInstanceState == null) {
             mFragments[FIRST] = HomePageFragment.newInstance();
-            mFragments[SECOND] = PlayFragment.newInstance();
+            mFragments[SECOND] = LivePlayPagerFragment.newInstance();
             mFragments[THIRD] = ShopCityFragment.newInstance();
             mFragments[FOURTH] = MeFragment.newInstance();
 
@@ -59,7 +59,7 @@ public class MainActivity extends SupportActivity implements BaseLazyMainFragmen
 
             // 这里我们需要拿到mFragments的引用,也可以通过getSupportFragmentManager.getFragments()自行进行判断查找(效率更高些),用下面的方法查找更方便些
             mFragments[FIRST] = findFragment(HomePageFragment.class);
-            mFragments[SECOND] = findFragment(PlayFragment.class);
+            mFragments[SECOND] = findFragment(LivePlayPagerFragment.class);
             mFragments[THIRD] = findFragment(ShopCityFragment.class);
             mFragments[FOURTH] = findFragment(MeFragment.class);
         }
@@ -100,8 +100,8 @@ public class MainActivity extends SupportActivity implements BaseLazyMainFragmen
                 if (count > 1) {
                     if (currentFragment instanceof HomePageFragment) {
                         currentFragment.popToChild(HomePageFragment.class, false);
-                    } else if (currentFragment instanceof PlayFragment) {
-                        currentFragment.popToChild(ViewPagerFragment.class, false);
+                    } else if (currentFragment instanceof LivePlayPagerFragment) {
+                        currentFragment.popToChild(PlayTypePagerFragment.class, false);
                     } else if (currentFragment instanceof ShopCityFragment) {
                         currentFragment.popToChild(ShopFragment.class, false);
                     } else if (currentFragment instanceof MeFragment) {

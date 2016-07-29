@@ -1,4 +1,4 @@
-package com.shanlin.camera.cameraclient.ui.fragment.liveplay.child.childpager;
+package com.shanlin.camera.cameraclient.ui.fragment.me.child;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,25 +11,26 @@ import com.shanlin.camera.cameraclient.R;
 import me.yokeyword.fragmentation.SupportFragment;
 
 /**
- * Created by APhil on 16/7/21.
+ * Created by APhil on 16/7/29.
  */
-public class PlayControllerFragment extends SupportFragment implements View.OnClickListener{
+public class HelpFragment extends SupportFragment {
 
-    public static PlayControllerFragment newInstance(){
-
-        return new PlayControllerFragment();
+    public static HelpFragment newInstance(){
+        HelpFragment fragment = new HelpFragment();
+        return fragment;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_play_controller, container, false);
+        View view = inflater.inflate(R.layout.fragment_help,container,false);
 
         return view;
     }
 
     @Override
-    public void onClick(View v) {
-
+    public boolean onBackPressedSupport() {
+        startWithPop(AvatarFragment.newInstance());
+        return true;
     }
 }

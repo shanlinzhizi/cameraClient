@@ -1,4 +1,4 @@
-package com.shanlin.camera.cameraclient.ui.fragment.liveplay.child.childpager;
+package com.shanlin.camera.cameraclient.ui.fragment.play.childpager;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -1,4 +1,4 @@
-package com.shanlin.camera.cameraclient.ui;
+package com.shanlin.camera.cameraclient.ui.fragment.play;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,8 +6,7 @@ import android.view.View;
 
 import com.shanlin.camera.cameraclient.R;
 import com.shanlin.camera.cameraclient.entity.CameraDevice;
-import com.shanlin.camera.cameraclient.ui.fragment.liveplay.child.ViewPagerFragment;
-import com.shanlin.camera.cameraclient.ui.fragment.liveplay.child.childpager.PlayControllerFragment;
+import com.shanlin.camera.cameraclient.ui.fragment.play.childpager.PlayControllerFragment;
 
 import me.yokeyword.fragmentation.SupportActivity;
 
@@ -19,7 +18,7 @@ public class PlayActivity extends SupportActivity {
     public static final String CODE_PRAC_DEVICE = "device";
     private CameraDevice mPlayDevice = null;
     private View view;
-    private ViewPagerFragment pagerFragment;
+    private PlayTypePagerFragment pagerFragment;
     private PlayControllerFragment controllerFragment;
 
     @Override
@@ -30,13 +29,13 @@ public class PlayActivity extends SupportActivity {
         getDeviceData();
 
         if( savedInstanceState == null){
-            pagerFragment = ViewPagerFragment.newInstance();
+            pagerFragment = PlayTypePagerFragment.newInstance();
             Bundle bundle = new Bundle();
             bundle.putParcelable(CODE_PRAC_DEVICE,mPlayDevice);
             pagerFragment.setArguments(bundle);
             controllerFragment = PlayControllerFragment.newInstance();
         }else{
-            pagerFragment = findFragment(ViewPagerFragment.class);
+            pagerFragment = findFragment(PlayTypePagerFragment.class);
             controllerFragment = findFragment(PlayControllerFragment.class);
         }
         loadFragments();
