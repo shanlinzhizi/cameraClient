@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"/>
 
     <android.support.v7.widget.Toolbar
+        android:visibility="gone"
         android:id="@+id/toolbarSettings"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"

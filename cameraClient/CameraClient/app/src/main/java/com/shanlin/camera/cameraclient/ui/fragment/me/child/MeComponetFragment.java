@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -16,9 +17,12 @@ import com.shanlin.camera.cameraclient.base.BaseFragment;
 import com.shanlin.camera.cameraclient.net.UserBzs;
 import com.shanlin.camera.cameraclient.ui.fragment.home.HomePageFragment;
 import com.shanlin.camera.cameraclient.ui.fragment.me.LoginActivity;
+import com.shanlin.camera.cameraclient.ui.fragment.me.MeFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import me.yokeyword.fragmentation.SupportFragment;
 
 
 /**
@@ -57,15 +61,31 @@ public class MeComponetFragment extends BaseFragment {
             }
         });
 
-        GridView gridView = (GridView) view.findViewById(R.id.grd_settings);
+        final GridView gridView = (GridView) view.findViewById(R.id.grd_settings);
         gridView.setAdapter(new MyAdapter());
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ItemData itemData = (ItemData) gridView.getAdapter().getItem(position);
 
+                try {
+                    if( getParentFragment() instanceof MeFragment) {
+                        ((MeFragment)getParentFragment()).start(itemData.target.newInstance());
+                    }
+                } catch (java.lang.InstantiationException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }
 
     @Override
     public boolean onBackPressedSupport() {
         // 这里实际项目中推荐使用 EventBus接耦
-        ((com.shanlin.camera.cameraclient.ui.fragment.me.MeFragment)getParentFragment()).onBackToFirstFragment();
+        ((com.shanlin.camera.cameraclient.ui.fragment.me.MeFragment)getParentFragment()).pop();
         return true;
     }
 
@@ -78,7 +98,7 @@ public class MeComponetFragment extends BaseFragment {
         }
 
         @Override
-        public Object getItem(int i) {
+        public ItemData getItem(int i) {
             return datas.get(i);
         }
 
@@ -119,29 +139,31 @@ public class MeComponetFragment extends BaseFragment {
 
     class ItemData{
         public String name;
-        public Class target;
+        public Class<? extends SupportFragment> target;
         public Integer imgResId;
     }
 
     private List<ItemData> generateItems(){
         List<ItemData> datas = new ArrayList<>(6);
-        ItemData data1 = new ItemData();
-        data1.imgResId = android.R.drawable.ic_menu_help;
-        data1.name = "帮助";
-        data1.target = HomePageFragment.class;
-        datas.add(data1);
+
 
         ItemData data2 = new ItemData();
         data2.imgResId = R.drawable.ic_settings_grey_500_24dp;
         data2.name = "设置";
-        data2.target = HomePageFragment.class;
+        data2.target = SettingsFragment.class;
         datas.add(data2);
 
         ItemData data3 = new ItemData();
-        data3.imgResId = android.R.drawable.ic_dialog_email;
+        data3.imgResId = android.R.drawable.ic_delete;
         data3.name = "注销";
         data3.target = HomePageFragment.class;
         datas.add(data2);
+
+        ItemData data1 = new ItemData();
+        data1.imgResId = android.R.drawable.ic_menu_help;
+        data1.name = getString(R.string.help);
+        data1.target = HelpFragment.class;
+        datas.add(data1);
 
         return datas;
     }

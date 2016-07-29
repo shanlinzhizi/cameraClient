@@ -1,20 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:background="@android:color/holo_blue_bright"
               android:layout_height="match_parent">
 
+
     <ImageView
-        android:layout_width="80dp"
+        android:id="@+id/img_user"
+        android:layout_width="120dp"
         android:src="@drawable/ic_avatar"
-        android:layout_gravity="center"
-        android:layout_height="80dp"/>
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_centerHorizontal="true"
+        android:layout_height="120dp"/>
+
+    <ImageView
+        android:id="@+id/btn_modify"
+        android:layout_width="@dimen/btn_height_45dp"
+        android:layout_height="@dimen/btn_height_45dp"
+        android:src="@android:drawable/ic_menu_edit"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        />
+
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_d"
+        android:orientation="vertical"
+        android:layout_below="@+id/img_user"
+        android:background="@android:color/darker_gray"
+        >
+
+    <LinearLayout
+        android:id="@+id/ll_me_other"
+        android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_gravity="bottom"
         android:background="@android:color/white"
         android:orientation="horizontal">
 
@@ -81,6 +104,23 @@
 
         </LinearLayout>
 
-
     </LinearLayout>
-</FrameLayout>
+
+  </LinearLayout>
+
+    <!--<GridView-->
+        <!--android:id="@+id/grd_settings"-->
+        <!--android:layout_below="@+id/ll_d"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:numColumns="3"-->
+        <!--/>-->
+
+    <include
+        layout="@layout/fragment_me_component"
+        android:layout_below="@+id/ll_d"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+</RelativeLayout>
