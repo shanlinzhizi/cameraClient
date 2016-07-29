@@ -40,6 +40,8 @@
 
         <activity android:name=".ui.fragment.play.PlayActivity"/>
 
+        <activity android:name=".ui.fragment.register.MultiActivity"/>
+
     </application>
 
 </manifest>

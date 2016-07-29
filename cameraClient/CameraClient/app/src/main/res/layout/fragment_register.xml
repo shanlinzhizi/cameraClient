@@ -9,6 +9,24 @@
     <include
         layout="@layout/layout_user_info"/>
 
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <EditText
+            android:id="@+id/edt_verify_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp"
+            android:hint="@string/promt_verfy_code"
+            android:maxLines="1"
+            android:singleLine="true"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_save"
         android:layout_width="wrap_content"

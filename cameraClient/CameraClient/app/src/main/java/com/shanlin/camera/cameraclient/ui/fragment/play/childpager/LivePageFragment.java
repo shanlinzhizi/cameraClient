@@ -38,19 +38,10 @@ import java.util.Locale;
 public class LivePageFragment extends BaseFragment
         implements SLDataSourceListener, VideoRenderer.OnVideoSizeChangedListener {
     private static final String ARG_TYPE = "arg_pos";
-    public static int TYPE_HOT = 1;
-    public static int TYPE_FAV = 2;
-
-    private int mType = TYPE_HOT;
-
-    private TextView mTvTitle;
 
     private CameraDevice mPlayDevice;
-
-
     private MediaPlayer player = null;
 
-    private int screenWidth, screenHeight;
     private Rect rect = new Rect();
 
     private RelativeLayout videowindow = null;
@@ -77,9 +68,6 @@ public class LivePageFragment extends BaseFragment
     }
 
     private void initView(View view) {
-//        mTvTitle = (TextView) view.findViewById(R.id.tv_title);
-//        mTvTitle.setText(view.getContext().getResources().getStringArray(R.array.play_type_title)[mType]);
-
 
         videowindow = (RelativeLayout) view.findViewById(R.id.video_window0);
         changeLayout(view.getContext().getResources().getConfiguration());
@@ -155,15 +143,11 @@ public class LivePageFragment extends BaseFragment
     private void initVideoWindowLayout() {
         DisplayMetrics dm = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
-        screenWidth = dm.widthPixels;
-        screenHeight = dm.heightPixels;
 
         rect.left = 0;
         rect.top = 0;
         rect.right = videowindow.getWidth();
         rect.bottom = videowindow.getHeight();
-
-
 
         setVideowindowLayoutParams(rect);
     }
