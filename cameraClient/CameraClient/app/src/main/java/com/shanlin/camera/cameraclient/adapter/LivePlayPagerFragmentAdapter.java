@@ -7,20 +7,20 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.shanlin.camera.cameraclient.MyApplication;
 import com.shanlin.camera.cameraclient.R;
-import com.shanlin.camera.cameraclient.ui.fragment.play.childpager.CloudPagerFragment;
-import com.shanlin.camera.cameraclient.ui.fragment.play.childpager.LivePageFragment;
-import com.shanlin.camera.cameraclient.ui.fragment.play.childpager.SdCardPagerFragment;
+import com.shanlin.camera.cameraclient.ui.fragment.liveplay.child.EmptyFavFragment;
+import com.shanlin.camera.cameraclient.ui.fragment.liveplay.child.LivePlayChannelFragment;
+import com.shanlin.camera.cameraclient.ui.fragment.liveplay.child.LivePlayHotFragment;
 
 
 /**
  * Created by YoKeyword on 16/6/5.
  */
-public class PlayPagerFragmentAdapter extends FragmentPagerAdapter {
-    private String[] mTab = MyApplication.getContext().getResources().getStringArray(R.array.play_type_title);
+public class LivePlayPagerFragmentAdapter extends FragmentPagerAdapter {
+    private String[] mTab = MyApplication.getContext().getResources().getStringArray(R.array.live_type_title);
 
     private Bundle bundle = null;
 
-    public PlayPagerFragmentAdapter(FragmentManager fm) {
+    public LivePlayPagerFragmentAdapter(FragmentManager fm) {
         super(fm);
     }
 
@@ -28,11 +28,11 @@ public class PlayPagerFragmentAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         Fragment fragment = null;
         if (position == 0) {
-            fragment =  LivePageFragment.newInstance(0);
+            fragment =  LivePlayHotFragment.newInstance();
         } else if( position == 1){
-            fragment = SdCardPagerFragment.newInstance(position);
+            fragment = LivePlayChannelFragment.newInstance();
         } else{
-            fragment =  CloudPagerFragment.newInstance(2);
+            fragment =  EmptyFavFragment.newInstance();
         }
         if( bundle != null) {
             fragment.setArguments(bundle);

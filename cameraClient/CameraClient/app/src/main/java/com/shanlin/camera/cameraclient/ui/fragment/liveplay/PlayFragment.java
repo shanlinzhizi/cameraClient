@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import com.shanlin.camera.cameraclient.R;
 import com.shanlin.camera.cameraclient.base.BaseLazyMainFragment;
 import com.shanlin.camera.cameraclient.ui.fragment.me.child.AvatarFragment;
-import com.shanlin.camera.cameraclient.ui.fragment.liveplay.child.ViewPagerFragment;
-import com.shanlin.camera.cameraclient.ui.fragment.liveplay.child.childpager.PlayControllerFragment;
+import com.shanlin.camera.cameraclient.ui.fragment.play.PlayTypePagerFragment;
+import com.shanlin.camera.cameraclient.ui.fragment.play.childpager.PlayControllerFragment;
 
 
 /**
@@ -55,7 +55,7 @@ public class PlayFragment extends BaseLazyMainFragment {
     }
 
     private void loadFragments(){
-        loadRootFragment(R.id.video_container, ViewPagerFragment.newInstance());
+        loadRootFragment(R.id.video_container, PlayTypePagerFragment.newInstance());
         loadRootFragment(R.id.controller_container, PlayControllerFragment.newInstance());
     }
 }

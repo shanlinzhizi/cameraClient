@@ -164,5 +164,10 @@
     <string name="error_empty_str">Filed is Null!</string>
     <string name="btn_delete">delete</string>
 
+    <string-array name="live_type_title">
+        <item>热门</item>
+        <item>频道</item>
+        <item>收藏</item>
+    </string-array>
 
 </resources>

@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.shanlin.camera.cameraclient.R;
 import com.shanlin.camera.cameraclient.base.BaseFragment;
-import com.shanlin.camera.cameraclient.ui.fragment.ShopCameraDetailFragment;
+import com.shanlin.camera.cameraclient.ui.fragment.shop.ShopCameraDetailFragment;
 import com.shanlin.camera.cameraclient.ui.fragment.shop.child.ShopFragment;
 
 import java.util.Random;

@@ -1,4 +1,4 @@
-package com.shanlin.camera.cameraclient.ui.fragment.liveplay.child;
+package com.shanlin.camera.cameraclient.ui.fragment.play;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,13 +16,13 @@ import com.shanlin.camera.cameraclient.base.BaseFragment;
 /**
  * Created by YoKeyword on 16/6/5.
  */
-public class ViewPagerFragment extends BaseFragment {
+public class PlayTypePagerFragment extends BaseFragment {
     private TabLayout mTab;
     private ViewPager mViewPager;
     public static final String PRC_DEV = "device";
 
-    public static ViewPagerFragment newInstance() {
-        ViewPagerFragment fragment = new ViewPagerFragment();
+    public static PlayTypePagerFragment newInstance() {
+        PlayTypePagerFragment fragment = new PlayTypePagerFragment();
         return fragment;
     }
 

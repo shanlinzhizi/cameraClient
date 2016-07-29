@@ -1,4 +1,4 @@
-package com.shanlin.camera.cameraclient.ui.fragment;
+package com.shanlin.camera.cameraclient.ui.fragment.shop;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

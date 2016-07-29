@@ -15,8 +15,8 @@ import com.shanlin.camera.cameraclient.R;
 import com.shanlin.camera.cameraclient.base.BaseBackFragment;
 import com.shanlin.camera.cameraclient.entity.CameraDevice;
 import com.shanlin.camera.cameraclient.net.DeviceManagerProxy;
-import com.shanlin.camera.cameraclient.ui.PlayActivity;
-import com.shanlin.camera.cameraclient.ui.fragment.ShopCameraDetailFragment;
+import com.shanlin.camera.cameraclient.ui.fragment.play.PlayActivity;
+import com.shanlin.camera.cameraclient.ui.fragment.shop.ShopCameraDetailFragment;
 
 import java.util.Arrays;
 
