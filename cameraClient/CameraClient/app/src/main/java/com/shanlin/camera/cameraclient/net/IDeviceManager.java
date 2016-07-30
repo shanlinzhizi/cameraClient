@@ -10,12 +10,14 @@ import java.util.List;
 public interface IDeviceManager {
     void getCameras(IResponse response);
 
-    void update(List<CameraDevice> devices, IResponse response);
+    void update(CameraDevice device, IResponse response);
 
-    void delete(List<CameraDevice> devices, IResponse response);
+    void delete(CameraDevice device, IResponse response);
 
-    void add(List<CameraDevice> devices, IResponse response);
+    void add(CameraDevice device, IResponse response);
 
     void refresh(IResponse response);
+
+    void close();
 
 }

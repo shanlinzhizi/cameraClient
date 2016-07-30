@@ -180,11 +180,19 @@
 
     <string name="logout">注销</string>
     <string name="promt_user_nick">Nick Name</string>
+    <string name="promt_user_name">User Name</string>
     <string name="promt_user_pwd">Password</string>
     <string name="error_invalidate_username">Invalidate User Name</string>
     <string name="error_invalidate_pwd">Invalidate password</string>
     <string name="hint_forget_pwd">忘记密码?</string>
     <string name="hint_get_pwd">找回密码</string>
     <string name="promt_verfy_code">Verify Code</string>
+
+    <string name="promt_sex">Sex</string>
+    <string name="promt_age">Age</string>
+    <string name="error_invalidate_age">Invalidate Age</string>
+    <string name="promt_mobile">Phone Number</string>
+    <string name="error_invalidate_phone">Invalidate Phone Number</string>
+    <string name="scan">Scan</string>
 
 </resources>

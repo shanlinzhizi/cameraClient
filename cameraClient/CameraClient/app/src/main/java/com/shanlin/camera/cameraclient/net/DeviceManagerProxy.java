@@ -31,23 +31,28 @@ public class DeviceManagerProxy implements IDeviceManager {
     }
 
     @Override
-    public void update(List<CameraDevice> devices,IResponse response) {
-        getCameraProxy.update(devices,response);
+    public void update(CameraDevice device,IResponse response) {
+        getCameraProxy.update(device,response);
     }
 
     @Override
-    public void delete(List<CameraDevice> devices,IResponse response) {
-        getCameraProxy.delete(devices,response);
+    public void delete(CameraDevice device,IResponse response) {
+        getCameraProxy.delete(device,response);
     }
 
     @Override
-    public void add(List<CameraDevice> devices,IResponse response) {
-        getCameraProxy.add(devices,response);
+    public void add(CameraDevice device,IResponse response) {
+        getCameraProxy.add(device,response);
     }
 
     @Override
     public void refresh(IResponse response) {
         getCameraProxy.refresh(response);
+    }
+
+    @Override
+    public void close() {
+        getCameraProxy.close();
     }
 
 

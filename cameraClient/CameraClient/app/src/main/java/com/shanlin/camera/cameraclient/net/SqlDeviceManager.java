@@ -27,24 +27,24 @@ public class SqlDeviceManager implements IDeviceManager {
     }
 
     @Override
-    public void update(List<CameraDevice> devices, IResponse response) {
-       int result = deviceDao.updateDevice(devices.get(0));
+    public void update(CameraDevice device, IResponse response) {
+       int result = deviceDao.updateDevice(device);
         if( response != null) {
             response.onResponse(result);
         }
     }
 
     @Override
-    public void delete(List<CameraDevice> devices, IResponse response) {
-        long result = deviceDao.deleteDevice(devices.get(0));
+    public void delete(CameraDevice device, IResponse response) {
+        long result = deviceDao.deleteDevice(device);
         if( response != null) {
             response.onResponse(result);
         }
     }
 
     @Override
-    public void add(List<CameraDevice> devices, IResponse response) {
-        int result = deviceDao.createDevice(devices.get(0));
+    public void add(CameraDevice device, IResponse response) {
+        int result = deviceDao.createDevice(device);
         if( response != null) {
             response.onResponse(result);
         }
@@ -56,5 +56,10 @@ public class SqlDeviceManager implements IDeviceManager {
         if( response != null) {
             response.onResponse(devices);
         }
+    }
+
+    @Override
+    public void close() {
+        deviceDao.close();
     }
 }

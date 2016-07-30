@@ -135,9 +135,8 @@ public class EditDeviceFragment extends BaseBackFragment implements View.OnClick
             mEditDevice.setNickName(nickName);
             mEditDevice.setAccessName(userName);
             mEditDevice.setAccessPwd(pwd);
-            List<CameraDevice> cameraDevices = new ArrayList<>(1);
-            cameraDevices.add(mEditDevice);
-            proxy.update(cameraDevices,null);
+
+            proxy.update(mEditDevice,null);
             getActivity().onBackPressed();
         }
     }

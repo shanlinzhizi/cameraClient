@@ -6,6 +6,8 @@
     android:layout_marginTop="?attr/actionBarSize"
     >
 
+
+
     <include
         layout="@layout/layout_user_info"/>
 

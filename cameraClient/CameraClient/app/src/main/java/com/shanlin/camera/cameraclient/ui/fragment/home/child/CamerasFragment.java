@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.transition.Fade;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +19,19 @@ import com.shanlin.camera.cameraclient.MainActivity;
 import com.shanlin.camera.cameraclient.R;
 import com.shanlin.camera.cameraclient.adapter.HomeCameraAdapter;
 import com.shanlin.camera.cameraclient.base.BaseFragment;
+import com.shanlin.camera.cameraclient.entity.BaseResultBean;
 import com.shanlin.camera.cameraclient.entity.CameraDevice;
+import com.shanlin.camera.cameraclient.entity.ErrorSLResponse;
+import com.shanlin.camera.cameraclient.entity.SearchResponse;
+import com.shanlin.camera.cameraclient.entity.SearchResponseBean;
 import com.shanlin.camera.cameraclient.event.TabSelectedEvent;
 import com.shanlin.camera.cameraclient.helper.DetailTransition;
 import com.shanlin.camera.cameraclient.listener.OnItemClickListener;
 import com.shanlin.camera.cameraclient.listener.OnItemPlayClickListener;
 import com.shanlin.camera.cameraclient.net.DeviceManagerProxy;
 import com.shanlin.camera.cameraclient.net.IResponse;
+import com.shanlin.camera.cameraclient.net.user.OnUserManualResultListener;
+import com.shanlin.camera.cameraclient.net.user.UserManagerProxy;
 import com.shanlin.camera.cameraclient.ui.fragment.play.PlayActivity;
 
 
@@ -48,20 +55,6 @@ public class CamerasFragment extends BaseFragment implements SwipeRefreshLayout.
 
     private boolean mInAtTop = true;
     private int mScrollTotal;
-
-    private String[] mTitles = new String[]{
-            "超美艳的18位古装新娘：朱茵、唐嫣、赵丽颖、佟丽娅等",
-            "盘点娱乐圈女星，你肯定想不到还有她",
-            "娱圈中原配与情人相处无事的明星们，原来大傻一点都不傻",
-            "娱乐圈十大演技好、绯闻绝缘体女星，无视潜规则难上位",
-            "他是中国最牛X主持,是龙年春晚主持第七人"
-    };
-
-    private int[] mImgRes = new int[]{
-            R.drawable.img_3, R.drawable.img_4, R.drawable.img_5, R.drawable.img_1, R.drawable.img_2
-    };
-
-
 
     public static CamerasFragment newInstance() {
 
@@ -176,7 +169,6 @@ public class CamerasFragment extends BaseFragment implements SwipeRefreshLayout.
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(_mActivity, "Action", Toast.LENGTH_SHORT).show();
                 start(AddDeviceFragment.newInstance(),SINGLETOP);
             }
         });
@@ -210,6 +202,45 @@ public class CamerasFragment extends BaseFragment implements SwipeRefreshLayout.
                 mRefreshLayout.setRefreshing(false);
             }
         }, 2000);
+
+        UserManagerProxy proxy =  UserManagerProxy.getInstance();
+        proxy.query(0, 0, "client002", new OnUserManualResultListener<BaseResultBean<SearchResponse>>() {
+            @Override
+            public void onResult(BaseResultBean resultBean) {
+                Log.e("query","bean result" + resultBean.getResultCode()  + " sid " + resultBean.getMsg());
+                SearchResponseBean bean = (SearchResponseBean) resultBean.getTarget();
+            }
+
+            @Override
+            public void onError(ErrorSLResponse response) {
+                Log.w("query","bean result" + response.getResultCode() + " sid " + response.getMsg());
+            }
+        });
+
+        UserManagerProxy.getInstance().add("client002", 1L, new OnUserManualResultListener() {
+            @Override
+            public void onResult(BaseResultBean resultBean) {
+                Log.e("add","bean result" + resultBean.getResultCode()  + " sid " + resultBean.getMsg());
+            }
+
+            @Override
+            public void onError(ErrorSLResponse response) {
+                Log.w("add","bean result" + response.getResultCode() + " sid " + response.getMsg());
+            }
+        });
+
+        UserManagerProxy.getInstance().delete("client002", new OnUserManualResultListener() {
+            public void onResult(BaseResultBean resultBean) {
+                Log.e("delete","bean result" + resultBean.getResultCode()  + " sid " + resultBean.getMsg());
+            }
+
+            @Override
+            public void onError(ErrorSLResponse response) {
+                Log.w("delete","bean result" + response.getResultCode() + " sid " + response.getMsg());
+            }
+        });
+
+
     }
 
     private void scrollToTop() {

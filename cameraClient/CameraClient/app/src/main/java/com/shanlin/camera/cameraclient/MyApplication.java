@@ -6,6 +6,7 @@ import android.content.Context;
 import com.shanlin.camera.cameraclient.net.DeviceManagerProxy;
 import com.shanlin.camera.cameraclient.net.SqlDeviceManager;
 import com.shanlin.camera.cameraclient.net.UserBzs;
+import com.shanlin.camera.cameraclient.net.user.UserManagerProxy;
 import com.sl.SLService;
 
 /**
@@ -41,21 +42,15 @@ public class MyApplication extends Application {
     }
 
     private void initDeviceConnectionService(){
-//        SLService.SLDeviceInfo deviceInfo = new SLService.SLDeviceInfo();
-//        deviceInfo.sid = "dev6";
-//        deviceInfo.passwd = "88888888";
-//        SLService slService = SLService.getInstance();
-//        slService.init(this,deviceInfo);
-//        slService.start();
 
         SLService.SLDeviceInfo info = new SLService.SLDeviceInfo();
-        info.sid = "client003";
-        info.passwd = "client003";
-
+        info.sid = "client002";
+        info.passwd = "client002";
+//
         SLService service = SLService.getInstance();
         service.init(getContext(), info);
-
         service.start();
+
 
     }
 

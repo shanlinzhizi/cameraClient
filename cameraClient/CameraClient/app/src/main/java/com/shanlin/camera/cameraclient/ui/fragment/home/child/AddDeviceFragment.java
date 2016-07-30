@@ -15,6 +15,7 @@ import android.widget.EditText;
 import com.shanlin.camera.cameraclient.R;
 import com.shanlin.camera.cameraclient.entity.CameraDevice;
 import com.shanlin.camera.cameraclient.net.DeviceManagerProxy;
+import com.shanlin.camera.cameraclient.net.user.UserManagerProxy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,7 @@ public class AddDeviceFragment extends SupportFragment implements View.OnClickLi
     private EditText mEdtDeviceSid;
 
     private Button mBtnCreate;
+    private Button mBtnScan;
 
     @Nullable
     @Override
@@ -52,6 +54,12 @@ public class AddDeviceFragment extends SupportFragment implements View.OnClickLi
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         forceOpenSoftKeyboard(getContext());
+    }
+
+    @Override
+    public boolean onBackPressedSupport() {
+        startWithPop(CamerasFragment.newInstance());
+        return true;
     }
 
     public  void forceOpenSoftKeyboard(Context context) {
@@ -69,8 +77,10 @@ public class AddDeviceFragment extends SupportFragment implements View.OnClickLi
         mEdtDevicePwd = (EditText) view.findViewById(R.id.edt_device_pwd);
         mEdtDeviceSid = (EditText) view.findViewById(R.id.edt_sid);
         mBtnCreate = (Button) view.findViewById(R.id.btn_create);
-        mBtnCreate.setOnClickListener(this);
+        mBtnScan = (Button) view.findViewById(R.id.btn_scan);
 
+        mBtnCreate.setOnClickListener(this);
+        mBtnScan.setOnClickListener(this);
         mEdtDeviceSid.requestFocus();
 
     }
@@ -80,6 +90,9 @@ public class AddDeviceFragment extends SupportFragment implements View.OnClickLi
         switch (v.getId()){
             case R.id.btn_create:
                 createDevice();
+                break;
+            case R.id.btn_scan:
+                startScan();
                 break;
         }
     }
@@ -120,10 +133,9 @@ public class AddDeviceFragment extends SupportFragment implements View.OnClickLi
             device.setNickName(nickName);
             device.setAccessName(userName);
             device.setAccessPwd(pwd);
-            List<CameraDevice> cameraDevices = new ArrayList<>(1);
-            cameraDevices.add(device);
-            proxy.add(cameraDevices,null);
+            proxy.add(device,null);
             startWithPop(CamerasFragment.newInstance());
+
         }
     }
 
@@ -133,10 +145,8 @@ public class AddDeviceFragment extends SupportFragment implements View.OnClickLi
         mEdtDevicePwd.setError(null);
     }
 
-
-    @Override
-    public boolean onBackPressedSupport() {
-        startWithPop(CamerasFragment.newInstance());
-        return true;
+    private void startScan(){
+        start(ScanFragment.newInstance());
     }
+
 }

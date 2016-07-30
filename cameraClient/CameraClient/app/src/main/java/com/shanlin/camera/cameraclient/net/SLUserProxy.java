@@ -2,13 +2,11 @@ package com.shanlin.camera.cameraclient.net;
 
 import com.shanlin.camera.cameraclient.entity.CameraDevice;
 
-import java.util.List;
 
 /**
- * Created by APhil on 16/7/21.
+ * Created by DELL on 2016/7/30.
  */
-public class RemoteDeviceManager implements IDeviceManager {
-
+public class SLUserProxy implements IDeviceManager {
 
     @Override
     public void getCameras(IResponse response) {

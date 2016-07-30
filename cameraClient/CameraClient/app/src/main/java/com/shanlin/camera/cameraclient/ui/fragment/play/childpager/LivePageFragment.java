@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.shanlin.camera.cameraclient.R;
 import com.shanlin.camera.cameraclient.base.BaseFragment;
 import com.shanlin.camera.cameraclient.entity.CameraDevice;
 
+import com.shanlin.camera.cameraclient.event.PlayControllEvent;
 import com.shanlin.camera.cameraclient.ui.fragment.play.PlayActivity;
 import com.sl.media.AView;
 import com.sl.media.MediaPlayer;
@@ -27,6 +29,9 @@ import com.sl.media.AViewRenderer;
 import com.sl.media.SLDataSource;
 import com.sl.media.SLDataSourceListener;
 import com.sl.media.VideoRenderer;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -64,7 +69,19 @@ public class LivePageFragment extends BaseFragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_play_live, container, false);
         initView(view);
+        EventBus.getDefault().register(this);
         return view;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void onPlayControllEvent(PlayControllEvent event){
+        Snackbar.make(videowindow,"click " + event.clickIndex,Snackbar.LENGTH_SHORT).show();
     }
 
     private void initView(View view) {
@@ -89,13 +106,6 @@ public class LivePageFragment extends BaseFragment
 
         handler.sendEmptyMessage(LAYOUT_INIT);
         handler.sendEmptyMessageDelayed(VIDEO_PLAY, 0);
-    }
-
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     private boolean play() {
@@ -288,7 +298,7 @@ public class LivePageFragment extends BaseFragment
     }
 
     @Override
-    public void onDataRate(int bytesPresecond) {
+    public void onDataRate(int bytesPresecond, int i1) {
         if(bytesPresecond > 1024){
             rateView.setText((bytesPresecond/1024) + "KB/s");
         }else{

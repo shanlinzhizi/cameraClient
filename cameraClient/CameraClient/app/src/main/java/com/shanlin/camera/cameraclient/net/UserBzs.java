@@ -1,6 +1,8 @@
 package com.shanlin.camera.cameraclient.net;
 
 import com.shanlin.camera.cameraclient.entity.AppUser;
+import com.shanlin.camera.cameraclient.net.user.OnUserManualResultListener;
+import com.sl.SLService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +24,9 @@ public class UserBzs {
      * @return
      */
     public static boolean login(AppUser user){
-        return false;
+        SLService service = SLService.getInstance();
+        int code = service.login(user.getSid(),user.getPwd());
+        return code == 0;
     }
 
     public static void autoLogin(){
@@ -39,7 +43,10 @@ public class UserBzs {
      * @return get user info from local
      */
     public static AppUser getAppUser(){
-        return new AppUser();
+//        AppUser user  = new AppUser();
+//        user.setUserName("client002");
+//        user.setPwd("client002");
+        return null;
     }
 
     /**

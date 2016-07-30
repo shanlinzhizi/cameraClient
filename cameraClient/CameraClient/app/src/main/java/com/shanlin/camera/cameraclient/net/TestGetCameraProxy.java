@@ -28,16 +28,25 @@ public class TestGetCameraProxy implements IDeviceManager {
     }
 
     @Override
-    public void update(List<CameraDevice> devices, IResponse response) {
+    public void update(CameraDevice device, IResponse response) {
+
     }
 
     @Override
-    public void delete(List<CameraDevice> devices, IResponse response) {
+    public void delete(CameraDevice device, IResponse response) {
+        if( devices.contains(device)){
+            devices.remove(device);
+        }
     }
 
     @Override
-    public void add(List<CameraDevice> devices, IResponse response) {
+    public void add(CameraDevice device, IResponse response) {
+        if(devices == null){
+            devices = new ArrayList<>();
+        }
+        devices.add(device);
     }
+
 
     @Override
     public void refresh(IResponse response) {
@@ -45,6 +54,14 @@ public class TestGetCameraProxy implements IDeviceManager {
         if( response!= null){
             Collections.shuffle(devices);
             response.onResponse(devices);
+        }
+    }
+
+    @Override
+    public void close() {
+        if( devices != null){
+            devices.clear();;
+            devices = null;
         }
     }
 
